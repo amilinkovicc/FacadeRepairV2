@@ -62,6 +62,7 @@
             this.createFacadeButton.TabIndex = 15;
             this.createFacadeButton.Text = "Create Facade";
             this.createFacadeButton.UseVisualStyleBackColor = true;
+            this.createFacadeButton.Click += new System.EventHandler(this.createFacadeButton_Click);
             // 
             // loadExistingFacadeDropDown
             // 

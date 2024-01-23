@@ -45,6 +45,7 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
                 p.Id = int.Parse(cols[0]);
                 p.x = double.Parse(cols[1]);
                 p.y = double.Parse(cols[2]);
+                // TODO Add PolygonId
                 output.Add(p);
             }
 
@@ -54,7 +55,6 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
         public static List<PolygonModel> ConvertToPolygonModels(this List<string> lines, string pointsFileName)
         {
             List<PolygonModel> output = new List<PolygonModel> ();
-            List<PointModel> points = pointsFileName.FullFilePath().LoadFile().ConvertToPointModels();
 
             foreach (string line in lines)
             {
@@ -62,10 +62,14 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
                 
                 PolygonModel p = new PolygonModel();
                 p.Id = int.Parse(cols[0]);
-                p.perimeter = double.Parse(cols[1]);
-                p.surfaceArea = double.Parse(cols[2]);
-                p.diameter = double.Parse(cols[3]);
+                //p.perimeter = double.Parse(cols[1]);
+                //p.surfaceArea = double.Parse(cols[2]);
+                //p.diameter = double.Parse(cols[3]);
+                // TODO add FacadeId
+                output.Add(p);
             }
+
+            return output;
         }
 
         public static List<FacadeModel> ConvertToFacadeModels(this List<string> lines)
@@ -97,12 +101,23 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
 
             foreach(PointModel p in models)
             {
-                lines.Add($"{p.Id},{p.x},{p.y}");
+                lines.Add($"{p.Id},{p.x},{p.y},{p.polygonId}");
             }
 
             File.WriteAllLines(fileName.FullFilePath(), lines);
         }
 
+        public static void SaveToPolygonsFile(this List<PolygonModel> models, string fileName)
+        {
+            List<string> lines = new List<string>();
+
+            foreach (PolygonModel p in models)
+            {
+                lines.Add($"{p.Id},{p.perimeter},{p.surfaceArea},{p.diameter},{p.facadeId}");
+            }
+
+            File.WriteAllLines(fileName.FullFilePath(), lines);
+        }
 
         public static void SaveToFacadesFile(this List<FacadeModel> models, string fileName)
         {

@@ -33,6 +33,11 @@ namespace FacadeRepairLibrary.DataAccess
             throw new NotImplementedException();
         }
 
+        public List<PointModel> DeletePoint(PointModel pointModel)
+        {
+            throw new NotImplementedException();
+        }
+
         // TODO - Finish EditPoint in SqlConnector
         public List<PointModel> EditPoint(PointModel model, string xValue, string yValue)
         {

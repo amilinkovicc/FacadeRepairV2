@@ -31,10 +31,7 @@ namespace FacadeRepairLibrary.Model
         /// </summary>
         public int polygonId { get; set; }
 
-        public PointModel()
-        {
-
-        }
+        public PointModel(){ }
 
         public PointModel(string xValue, string yValue)
         {

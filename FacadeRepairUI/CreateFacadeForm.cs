@@ -96,5 +96,15 @@ namespace FacadeRepairUI
 
             return output;
         }
+
+        private void addPolygonButton_Click(object sender, EventArgs e)
+        {
+            // Connect with CreatePolygonForm
+            CreatePolygonForm frm = new CreatePolygonForm();
+            frm.Show();
+
+            // Get back from a form a PoligonModel
+            // Take the PolygonModel and put it into polygonsListBox
+        }
     }
 }

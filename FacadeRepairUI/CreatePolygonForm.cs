@@ -57,11 +57,14 @@ namespace FacadeRepairUI
 
         private void createPolygonButton_Click(object sender, EventArgs e)
         {
-            PolygonModel polygon = new PolygonModel();
+            if (ValidatePolygon())
+            {
+                PolygonModel polygon = new PolygonModel();
 
-            polygon.points = pointsOfPolygon;
+                polygon.points = pointsOfPolygon;
 
-            polygon = GlobalConfig.Connection .CreatePolygon(polygon);
+                polygon = GlobalConfig.Connection.CreatePolygon(polygon);
+            }
 
             // TODO - If we aren't closing this form after creation, reset the form.
         }
@@ -118,18 +121,24 @@ namespace FacadeRepairUI
             return output;
         }
 
+        private bool ValidatePolygon() 
+        {
+            bool output = true;
+
+            // TODO - Is polygon possible to constract
+
+            return output;
+        }
+
         private void deletePointButton_Click(object sender, EventArgs e)
         {
             PointModel p = (PointModel)pointsListBox.SelectedItem;
 
             if ( p != null )
             {
-                pointsOfPolygon.Remove(p);
-
+                pointsOfPolygon = GlobalConfig.Connection.DeletePoint(p);
                 WireUpList();
             }
-
-            // TODO - Delete point from .csv
         }
 
         private void pointsListBox_MouseClick(object sender, MouseEventArgs e)

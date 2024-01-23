@@ -173,6 +173,7 @@
             this.addPolygonButton.TabIndex = 12;
             this.addPolygonButton.Text = "Add Polygon";
             this.addPolygonButton.UseVisualStyleBackColor = true;
+            this.addPolygonButton.Click += new System.EventHandler(this.addPolygonButton_Click);
             // 
             // deletePolygonButton
             // 

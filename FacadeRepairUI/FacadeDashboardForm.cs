@@ -16,5 +16,10 @@ namespace FacadeRepairUI
         {
             InitializeComponent();
         }
+
+        private void createFacadeButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
