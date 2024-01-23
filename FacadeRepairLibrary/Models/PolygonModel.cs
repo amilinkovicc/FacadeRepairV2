@@ -27,6 +27,7 @@ namespace FacadeRepairLibrary.Model
         public double perimeter 
         {
             get { return Perimeter(points); }
+            set { }
         }
 
         /// <summary>
@@ -35,6 +36,7 @@ namespace FacadeRepairLibrary.Model
         public double surfaceArea 
         {
             get { return SurfaceArea(points); }
+            set { }
         }
 
         /// <summary>
@@ -43,12 +45,15 @@ namespace FacadeRepairLibrary.Model
         public double diameter 
         {
             get { return Diameter(points); }
+            set { }
         }
 
-        /// <summary>
-        /// The foreign key. Connects polygon to the specific facade.
-        /// </summary>
-        public int facadeId { get; set; }
+        public string NameOfPolygon
+        {
+            get { return $"Polygon {Id}"; } // TODO - Come up with better names for polygons
+        }
+
+        // TODO - Add summary
 
         private double Perimeter(List<PointModel> points) 
         {

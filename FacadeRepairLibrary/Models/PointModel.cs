@@ -26,11 +26,6 @@ namespace FacadeRepairLibrary.Model
         /// </summary>
         public double y { get; set; }
 
-        /// <summary>
-        /// The foreign key. Connects point to the specific polygon.
-        /// </summary>
-        public int polygonId { get; set; }
-
         public PointModel(){ }
 
         public PointModel(string xValue, string yValue)
@@ -46,7 +41,7 @@ namespace FacadeRepairLibrary.Model
 
         public string Cordinates
         {
-            get { return $"({x}, {y})"; }
+            get { return $"({x},{y})"; }
         }
     }
 }

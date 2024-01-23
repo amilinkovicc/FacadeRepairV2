@@ -16,22 +16,17 @@ namespace FacadeRepairUI
 {
     public partial class CreatePolygonForm : Form
     {
-        private List<PointModel> pointsOfPolygon = GlobalConfig.Connection.GetPointsAll();
+        private List<PointModel> pointsOfPolygon = new List<PointModel>();
 
-        public CreatePolygonForm()
+        IPolygonRequester callingForm;
+
+        public CreatePolygonForm(IPolygonRequester caller)
         {
             InitializeComponent();
 
-            //CreateSampleData();
+            callingForm = caller;
 
             WireUpList();
-        }
-
-        private void CreateSampleData()
-        {
-            pointsOfPolygon.Add(new PointModel { x = 5, y = 10 });
-            pointsOfPolygon.Add(new PointModel { x = 20, y = 40 });
-            pointsOfPolygon.Add(new PointModel { x = 75, y = 30 });
         }
 
         private void WireUpList()
@@ -64,9 +59,12 @@ namespace FacadeRepairUI
                 polygon.points = pointsOfPolygon;
 
                 polygon = GlobalConfig.Connection.CreatePolygon(polygon);
-            }
 
-            // TODO - If we aren't closing this form after creation, reset the form.
+                callingForm.PolygonComplete(polygon);
+
+                // TODO - If we aren't closing this form after creation, reset the form.
+                this.Close();
+            }
         }
 
         private void addPointButton_Click(object sender, EventArgs e)

@@ -12,38 +12,54 @@ using System.Windows.Forms;
 
 namespace FacadeRepairUI
 {
-    public partial class CreateFacadeForm : Form
+    public partial class CreateFacadeForm : Form, IPolygonRequester
     {
+        private List<PolygonModel> polygonsOfFacade = new List<PolygonModel>();
+
         public CreateFacadeForm()
         {
             InitializeComponent();
+
+            WireUpList();
         }
 
         // TODO - Wire up typeOfDamageDropDown and enum DamageType
         // TODO - Get info for polygonListBox from SavedData
 
+        private void WireUpList()
+        {
+            polygonsListBox.DataSource = null;
+            polygonsListBox.DataSource = polygonsOfFacade;
+            polygonsListBox.DisplayMember = "NameOfPolygon";
+        }
+
         private void createFacadeButton_Click(object sender, EventArgs e)
         {
             if (ValidateFacade())
             {
-                FacadeModel model = new FacadeModel();
+                FacadeModel facade = new FacadeModel();
 
-                model.objectName = objectNameValue.Text;
-                model.objectAddress = objectAddressValue.Text;
-                model.objectOwner = objectOwnerValue.Text;
-                model.objectWidth = double.Parse(objectWidthValue.Text);
-                model.objectHeight = double.Parse(objectHeightValue.Text);
-                model.damageType = (DamageType)Enum.Parse(typeof(DamageType), typeOfDamageDropDown.Text, true);
+                facade.objectName = objectNameValue.Text;
+                facade.objectAddress = objectAddressValue.Text;
+                facade.objectOwner = objectOwnerValue.Text;
+                facade.objectWidth = double.Parse(objectWidthValue.Text);
+                facade.objectHeight = double.Parse(objectHeightValue.Text);
+                facade.damageType = (DamageType)Enum.Parse(typeof(DamageType), typeOfDamageDropDown.Text, true);
+
+                facade.polygons = polygonsOfFacade;
+
+                facade = GlobalConfig.Connection.CreateFacade(facade);
 
 
-                GlobalConfig.Connection.CreateFacade(model);
+                this.Close();
 
-                objectNameValue.Text = "";          // "" == string.Empty
+                /*objectNameValue.Text = "";          // "" == string.Empty
                 objectAddressValue.Text = "";
                 objectOwnerValue.Text = "";
                 objectWidthValue.Text = "";
                 objectHeightValue.Text = "";
                 typeOfDamageDropDown.Text = "";
+                polygonsListBox.Text = "";*/
             }
             else
             {
@@ -100,11 +116,16 @@ namespace FacadeRepairUI
         private void addPolygonButton_Click(object sender, EventArgs e)
         {
             // Connect with CreatePolygonForm
-            CreatePolygonForm frm = new CreatePolygonForm();
+            CreatePolygonForm frm = new CreatePolygonForm(this);
             frm.Show();
+        }
 
+        public void PolygonComplete(PolygonModel polygonModel)
+        {
             // Get back from a form a PoligonModel
             // Take the PolygonModel and put it into polygonsListBox
+            polygonsOfFacade.Add(polygonModel);
+            WireUpList();
         }
     }
 }

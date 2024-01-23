@@ -39,7 +39,7 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
 
             foreach (string line in lines)
             {
-                string[] cols = line.Split(',');
+                string[] cols = line.Split(';');
 
                 PointModel p = new PointModel();
                 p.Id = int.Parse(cols[0]);
@@ -58,14 +58,24 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
 
             foreach (string line in lines)
             {
-                string[] cols = line.Split(',');
+                string[] cols = line.Split(';');
                 
                 PolygonModel p = new PolygonModel();
                 p.Id = int.Parse(cols[0]);
-                //p.perimeter = double.Parse(cols[1]);
-                //p.surfaceArea = double.Parse(cols[2]);
-                //p.diameter = double.Parse(cols[3]);
-                // TODO add FacadeId
+                p.perimeter = double.Parse(cols[1]);
+                p.surfaceArea = double.Parse(cols[2]);
+                p.diameter = double.Parse(cols[3]);
+                string temp = cols[4]; // TODO - Finish coversion. List of points seperated with '|'
+
+                //temp = "|(8,9)|(2,9)|(2,3)|(8,3)"
+                string[] polygonPoints = temp.Split('|');
+                for (int i = 1, n = polygonPoints.Count(); i < n; i++)
+                {
+                    //(8,9)
+                    p.points.Add(new PointModel(Convert.ToString(polygonPoints[i][1]), Convert.ToString(polygonPoints[i][3])));
+                    char charX = polygonPoints[i][1];
+                }
+
                 output.Add(p);
             }
 
@@ -78,7 +88,7 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
 
             foreach (string line in lines)
             {
-                string[] cols = line.Split(',');
+                string[] cols = line.Split(';');
 
                 FacadeModel f = new FacadeModel();
                 f.Id = int.Parse(cols[0]);
@@ -101,7 +111,7 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
 
             foreach(PointModel p in models)
             {
-                lines.Add($"{p.Id},{p.x},{p.y},{p.polygonId}");
+                lines.Add($"{p.Id};{p.x};{p.y}");
             }
 
             File.WriteAllLines(fileName.FullFilePath(), lines);
@@ -111,9 +121,15 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
         {
             List<string> lines = new List<string>();
 
-            foreach (PolygonModel p in models)
+            foreach (PolygonModel polygon in models)
             {
-                lines.Add($"{p.Id},{p.perimeter},{p.surfaceArea},{p.diameter},{p.facadeId}");
+                string listOfPoints = "";
+                for (int i = 0, m = polygon.points.Count(); i < m; i++)
+                {
+                    listOfPoints += "|" + polygon.points[i].Cordinates;
+                }
+
+                lines.Add($"{polygon.Id};{polygon.perimeter};{polygon.surfaceArea};{polygon.diameter};{listOfPoints}");
             }
 
             File.WriteAllLines(fileName.FullFilePath(), lines);
@@ -125,7 +141,7 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
 
             foreach(FacadeModel f in models)
             {
-                lines.Add($"{f.Id},{f.objectName},{f.objectAddress},{f.objectOwner},{f.objectHeight},{f.objectWidth},{f.damageType}");
+                lines.Add($"{f.Id};{f.objectName};{f.objectAddress};{f.objectOwner};{f.objectHeight};{f.objectWidth};{f.damageType}");
             }
 
             File.WriteAllLines(fileName.FullFilePath(), lines);
