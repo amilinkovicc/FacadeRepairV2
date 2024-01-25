@@ -18,9 +18,9 @@ namespace FacadeRepairUI
     {
         private List<PointModel> pointsOfPolygon = new List<PointModel>();
 
-        IPolygonViewRequester callingForm;
+        IPolygonRequester callingForm;
 
-        public CreatePolygonForm(IPolygonViewRequester caller)
+        public CreatePolygonForm(IPolygonRequester caller)
         {
             InitializeComponent();
 

@@ -75,7 +75,6 @@
       <DependentUpon>FacadeViewerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IPolygonRequester.cs" />
-    <Compile Include="IPolygonViewRequester.cs" />
     <Compile Include="PolygonViewerForm.cs">
       <SubType>Form</SubType>
     </Compile>

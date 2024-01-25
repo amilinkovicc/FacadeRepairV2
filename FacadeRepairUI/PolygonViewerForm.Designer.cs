@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PolygonViewerForm));
-            this.facadeNameValue = new System.Windows.Forms.Label();
+            this.polygonNameValue = new System.Windows.Forms.Label();
             this.headerLabel = new System.Windows.Forms.Label();
-            this.polygonRepresentationPicturebox = new System.Windows.Forms.PictureBox();
+            this.polygonRepresentationPictureBox = new System.Windows.Forms.PictureBox();
             this.polygonRepresentationLabel = new System.Windows.Forms.Label();
             this.polygonInfoGroupBox = new System.Windows.Forms.GroupBox();
             this.polygonPerimeterLabel = new System.Windows.Forms.Label();
@@ -44,20 +44,20 @@
             this.pointsLabel = new System.Windows.Forms.Label();
             this.editPolygonButton = new System.Windows.Forms.Button();
             this.boundingBoxButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.polygonRepresentationPicturebox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.polygonRepresentationPictureBox)).BeginInit();
             this.polygonInfoGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // facadeNameValue
+            // polygonNameValue
             // 
-            this.facadeNameValue.AutoSize = true;
-            this.facadeNameValue.Font = new System.Drawing.Font("Segoe UI Light", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.facadeNameValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.facadeNameValue.Location = new System.Drawing.Point(155, 9);
-            this.facadeNameValue.Name = "facadeNameValue";
-            this.facadeNameValue.Size = new System.Drawing.Size(150, 50);
-            this.facadeNameValue.TabIndex = 3;
-            this.facadeNameValue.Text = "<none>";
+            this.polygonNameValue.AutoSize = true;
+            this.polygonNameValue.Font = new System.Drawing.Font("Segoe UI Light", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.polygonNameValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
+            this.polygonNameValue.Location = new System.Drawing.Point(155, 9);
+            this.polygonNameValue.Name = "polygonNameValue";
+            this.polygonNameValue.Size = new System.Drawing.Size(150, 50);
+            this.polygonNameValue.TabIndex = 3;
+            this.polygonNameValue.Text = "<none>";
             // 
             // headerLabel
             // 
@@ -70,16 +70,17 @@
             this.headerLabel.TabIndex = 2;
             this.headerLabel.Text = "Polygon:";
             // 
-            // polygonRepresentationPicturebox
+            // polygonRepresentationPictureBox
             // 
-            this.polygonRepresentationPicturebox.BackColor = System.Drawing.Color.Silver;
-            this.polygonRepresentationPicturebox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.polygonRepresentationPicturebox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.polygonRepresentationPicturebox.Location = new System.Drawing.Point(22, 125);
-            this.polygonRepresentationPicturebox.Name = "polygonRepresentationPicturebox";
-            this.polygonRepresentationPicturebox.Size = new System.Drawing.Size(630, 850);
-            this.polygonRepresentationPicturebox.TabIndex = 7;
-            this.polygonRepresentationPicturebox.TabStop = false;
+            this.polygonRepresentationPictureBox.BackColor = System.Drawing.Color.Silver;
+            this.polygonRepresentationPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.polygonRepresentationPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.polygonRepresentationPictureBox.Location = new System.Drawing.Point(22, 125);
+            this.polygonRepresentationPictureBox.Name = "polygonRepresentationPictureBox";
+            this.polygonRepresentationPictureBox.Size = new System.Drawing.Size(630, 850);
+            this.polygonRepresentationPictureBox.TabIndex = 7;
+            this.polygonRepresentationPictureBox.TabStop = false;
+            this.polygonRepresentationPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.polygonRepresentationPictureBox_Paint);
             // 
             // polygonRepresentationLabel
             // 
@@ -236,16 +237,16 @@
             this.Controls.Add(this.pointsListBox);
             this.Controls.Add(this.pointsLabel);
             this.Controls.Add(this.polygonInfoGroupBox);
-            this.Controls.Add(this.polygonRepresentationPicturebox);
+            this.Controls.Add(this.polygonRepresentationPictureBox);
             this.Controls.Add(this.polygonRepresentationLabel);
-            this.Controls.Add(this.facadeNameValue);
+            this.Controls.Add(this.polygonNameValue);
             this.Controls.Add(this.headerLabel);
             this.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.Name = "PolygonViewerForm";
             this.Text = "Polygon Viewer";
-            ((System.ComponentModel.ISupportInitialize)(this.polygonRepresentationPicturebox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.polygonRepresentationPictureBox)).EndInit();
             this.polygonInfoGroupBox.ResumeLayout(false);
             this.polygonInfoGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -255,9 +256,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label facadeNameValue;
+        private System.Windows.Forms.Label polygonNameValue;
         private System.Windows.Forms.Label headerLabel;
-        private System.Windows.Forms.PictureBox polygonRepresentationPicturebox;
+        private System.Windows.Forms.PictureBox polygonRepresentationPictureBox;
         private System.Windows.Forms.Label polygonRepresentationLabel;
         private System.Windows.Forms.GroupBox polygonInfoGroupBox;
         private System.Windows.Forms.Label polygonPerimeterLabel;
