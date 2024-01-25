@@ -86,13 +86,16 @@ namespace FacadeRepairUI
                 polygon.points = pointsOfPolygon;
 
                 GlobalConfig.Connection.CreatePolygonId(polygon);
-
                 GlobalConfig.Connection.SavePolygon(polygon);
 
                 callingForm.PolygonComplete(polygon);
 
                 // TODO - If we aren't closing this form after creation, reset the form.
                 this.Close();
+            }
+            else
+            {
+                MessageBox.Show("This form has invalid information. Please check it and try again.");
             }
         }
                
@@ -144,6 +147,10 @@ namespace FacadeRepairUI
                 output = false;
             }
 
+            if (pointsOfPolygon.Count() < 3)
+            {
+                output = false;
+            }
             // TODO - It shouldn't be possible to add point out of facade.
             //if (x > width || y > height)
             //{

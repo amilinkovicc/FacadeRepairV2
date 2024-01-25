@@ -47,8 +47,18 @@ namespace FacadeRepairLibrary.Model
         public DamageType damageType { get; set; }
 
         /// <summary>
+        /// List of the polygonsId of the object that you're working on.
+        /// </summary>
+        public List<int> polygonsId { get; set; } = new List<int>();
+
+        /// <summary>
         /// List of the polygons of the object that you're working on.
         /// </summary>
         public List<PolygonModel> polygons { get; set; } = new List<PolygonModel>();
+
+        public string NameOfFacade
+        {
+            get { return $"Facade {Id}"; } // TODO - Come up with better names for polygons
+        }
     }
 }

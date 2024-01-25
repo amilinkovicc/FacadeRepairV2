@@ -48,6 +48,26 @@ namespace FacadeRepairLibrary.Model
             set { }
         }
 
+        //public PolygonModel() { }
+
+        //public PolygonModel(string[] props)
+        //{
+        //    PolygonModel p = new PolygonModel();
+        //    p.Id = int.Parse(props[0]);
+        //    p.perimeter = double.Parse(props[1]);
+        //    p.surfaceArea = double.Parse(props[2]);
+        //    p.diameter = double.Parse(props[3]);
+        //    string temp = props[4]; // TODO - Finish conversion. List of points seperated with '|'
+
+        //    //temp = "|(8,9)|(2,9)|(2,3)|(8,3)"
+        //    string[] polygonPoints = temp.Split('|');
+        //    for (int i = 1, n = polygonPoints.Count(); i < n; i++) //* i starts from 1 because polygonPoints[0] = ""
+        //    {
+        //        //(8 9)
+        //        p.points.Add(new PointModel(Convert.ToString(polygonPoints[i][1]), Convert.ToString(polygonPoints[i][3])));
+        //    }
+        //}
+
         public string NameOfPolygon
         {
             get { return $"Polygon {Id}"; } // TODO - Come up with better names for polygons

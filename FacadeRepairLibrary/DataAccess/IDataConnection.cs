@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FacadeRepairLibrary.DataAccess.TextHelpers;
 using FacadeRepairLibrary.Model;
 
 namespace FacadeRepairLibrary.DataAccess
@@ -25,6 +26,10 @@ namespace FacadeRepairLibrary.DataAccess
 
         void SavePolygon(PolygonModel polygonModel);
 
-        FacadeModel CreateFacade(FacadeModel facadeModel);
+        PolygonModel GetPolygonById(int id);
+
+        FacadeModel CreateFacadeId(FacadeModel facadeModel);
+
+        void SaveFacede(FacadeModel facadeModel);
     }
 }

@@ -30,5 +30,20 @@ namespace FacadeRepairLibrary.DataAccess
         {
             throw new NotImplementedException();
         }
+
+        public FacadeModel CreateFacadeId(FacadeModel facadeModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveFacede(FacadeModel facadeModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PolygonModel GetPolygonById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

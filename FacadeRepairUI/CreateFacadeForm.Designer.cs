@@ -187,6 +187,7 @@
             this.deletePolygonButton.TabIndex = 13;
             this.deletePolygonButton.Text = "Delete Polygon";
             this.deletePolygonButton.UseVisualStyleBackColor = true;
+            this.deletePolygonButton.Click += new System.EventHandler(this.deletePolygonButton_Click);
             // 
             // createFacadeButton
             // 

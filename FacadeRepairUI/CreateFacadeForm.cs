@@ -19,9 +19,13 @@ namespace FacadeRepairUI
         IPolygonViewRequester callingPolygonViewerForm;
         IPolygonRequester callingCreatePolygonForm;
 
-        public CreateFacadeForm()
+        IFacadeRequester callingCreateFacadeForm;
+
+        public CreateFacadeForm(IFacadeRequester caller)
         {
             InitializeComponent();
+
+            callingCreateFacadeForm = caller;
 
             WireUpList();
         }
@@ -31,10 +35,16 @@ namespace FacadeRepairUI
 
         private void addPolygonButton_Click(object sender, EventArgs e)
         {
-            // Connect with CreatePolygonForm
-            CreatePolygonForm frm = new CreatePolygonForm(this);
-            frm.Show();
+            DamageType.TryParse(typeOfDamageDropDown.Text, out DamageType damage);
+
+            if (damage == DamageType.Partially)
+            {
+                // Connect with CreatePolygonForm
+                CreatePolygonForm frm = new CreatePolygonForm(this);
+                frm.Show();
+            }
         }
+
         private void loadPolygonButton_Click(object sender, EventArgs e)
         {
             PolygonModel p = (PolygonModel)polygonsListBox.SelectedItem;
@@ -45,7 +55,18 @@ namespace FacadeRepairUI
                 PolygonViewerForm frm = new PolygonViewerForm(this, p);
                 frm.Show();
             }
+        }
 
+        private void deletePolygonButton_Click(object sender, EventArgs e)
+        {
+            PolygonModel p = (PolygonModel)polygonsListBox.SelectedItem;
+
+            if (p != null)
+            {
+                polygonsOfFacade.Remove(p);
+
+                WireUpList();
+            }
         }
 
         private void createFacadeButton_Click(object sender, EventArgs e)
@@ -61,20 +82,21 @@ namespace FacadeRepairUI
                 facade.objectHeight = double.Parse(objectHeightValue.Text);
                 facade.damageType = (DamageType)Enum.Parse(typeof(DamageType), typeOfDamageDropDown.Text, true);
 
-                facade.polygons = polygonsOfFacade;
+                DamageType.TryParse(typeOfDamageDropDown.Text, out DamageType damage);
+                
+                if (damage == DamageType.Partially)
+                {
+                    facade.polygons = polygonsOfFacade; 
+                }
 
-                facade = GlobalConfig.Connection.CreateFacade(facade);
+                GlobalConfig.Connection.CreateFacadeId(facade);
+                GlobalConfig.Connection.SaveFacede(facade);
 
+                // TODO - Connect this form with FacadeViewerForm
+                //callingForm.PolygonComplete(polygon);
 
+                // TODO - If we aren't closing this form after creation, reset the form.
                 this.Close();
-
-                /*objectNameValue.Text = "";          // "" == string.Empty
-                objectAddressValue.Text = "";
-                objectOwnerValue.Text = "";
-                objectWidthValue.Text = "";
-                objectHeightValue.Text = "";
-                typeOfDamageDropDown.Text = "";
-                polygonsListBox.Text = "";*/
             }
             else
             {
@@ -150,5 +172,6 @@ namespace FacadeRepairUI
             polygonsOfFacade.Add(polygonModel);
             WireUpList();
         }
+
     }
 }

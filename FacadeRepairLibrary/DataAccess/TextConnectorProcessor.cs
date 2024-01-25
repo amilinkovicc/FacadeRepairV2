@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FacadeRepairLibrary.Model;
+using FacadeRepairLibrary.DataAccess;
 
 // * Load the text file
 // * Convert the text to List<PointModel>
@@ -75,7 +76,6 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
                 {
                     //(8 9)
                     p.points.Add(new PointModel(Convert.ToString(polygonPoints[i][1]), Convert.ToString(polygonPoints[i][3])));
-                    char charX = polygonPoints[i][1];
                 }
 
                 output.Add(p);
@@ -84,13 +84,13 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
             return output;
         }
 
-        public static List<FacadeModel> ConvertToFacadeModels(this List<string> lines)
+        public static List<FacadeModel> ConvertToFacadeModels(this List<string> lines, string pointsFileName)
         {
             List<FacadeModel> output = new List<FacadeModel>();
 
             foreach (string line in lines)
             {
-                string[] cols = line.Split(';');
+                string[] cols = line.Split(',');
 
                 FacadeModel f = new FacadeModel();
                 f.Id = int.Parse(cols[0]);
@@ -100,7 +100,16 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
                 f.objectHeight = double.Parse(cols[4]);
                 f.objectWidth = double.Parse(cols[5]);
                 f.damageType = (DamageType) Enum.Parse(typeof(DamageType), cols[6], true);
-                // TODO - Connect facades with polygons (foreign key)
+                string temp = cols[7]; //temp = "|2|4|5"
+
+                // TODO - Connect facades with polygonId-s (foreign key)
+                string[] facadePolygonIds = temp.Split('|');
+                for (int i = 1, n = facadePolygonIds.Count(); i < n; i++) //* i starts from 1 because polygonPoints[0] = ""
+                {
+                    //2
+                    f.polygonsId.Add(int.Parse(facadePolygonIds[i]));
+                }
+
                 output.Add(f);
             }
 
@@ -141,9 +150,15 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
         {
             List<string> lines = new List<string>();
 
-            foreach(FacadeModel f in models)
+            foreach(FacadeModel facade in models)
             {
-                lines.Add($"{f.Id};{f.objectName};{f.objectAddress};{f.objectOwner};{f.objectHeight};{f.objectWidth};{f.damageType}");
+                string listOfPolygons = "";
+                for (int i = 0, m = facade.polygons.Count(); i < m; i++)
+                {
+                    listOfPolygons += "|" + facade.polygons[i].Id;
+                }
+
+                lines.Add($"{facade.Id},{facade.objectName},{facade.objectAddress},{facade.objectOwner},{facade.objectHeight},{facade.objectWidth},{facade.damageType},{listOfPolygons}");
             }
 
             File.WriteAllLines(fileName.FullFilePath(), lines);

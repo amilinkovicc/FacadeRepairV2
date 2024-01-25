@@ -213,6 +213,7 @@
             this.editFacadeButton.TabIndex = 15;
             this.editFacadeButton.Text = "Edit Facade";
             this.editFacadeButton.UseVisualStyleBackColor = true;
+            this.editFacadeButton.Click += new System.EventHandler(this.editFacadeButton_Click);
             // 
             // polygonsListBox
             // 

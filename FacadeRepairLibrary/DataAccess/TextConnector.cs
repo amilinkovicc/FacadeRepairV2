@@ -12,7 +12,8 @@ namespace FacadeRepairLibrary.DataAccess
     public class TextConnector : IDataConnection
     {
         private const string PolygonFile = "PolygonModels.csv";
-        private const string FacadesFile = "FacadeModels.csv";
+        private const string FacadeFile = "FacadeModels.csv";
+        private PolygonModel chosenPolygon;
 
         // TODO - write summaries
 
@@ -132,15 +133,31 @@ namespace FacadeRepairLibrary.DataAccess
             polygons.SaveToPolygonsFile(PolygonFile);
         }
 
+        public PolygonModel GetPolygonById(int id)
+        {
+            List<PolygonModel> polygons = PolygonFile.FullFilePath().LoadFile().ConvertToPolygonModels(PolygonFile);
+            PolygonModel chosenPolygon = new PolygonModel();
+
+            foreach (PolygonModel polygon in polygons)
+            {
+                if (id == polygon.Id)
+                {
+                    chosenPolygon = polygon;
+                }
+            }
+
+            return chosenPolygon;
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public FacadeModel CreateFacade(FacadeModel model)
+        public FacadeModel CreateFacadeId(FacadeModel facadeModel)
         {
             //Load the text file and Convert the text to List<FacadeModel>
-            List<FacadeModel> facades = FacadesFile.FullFilePath().LoadFile().ConvertToFacadeModels();
+            List<FacadeModel> facades = FacadeFile.FullFilePath().LoadFile().ConvertToFacadeModels(FacadeFile);
 
             //Find the max ID
             int currentId = 1;
@@ -150,17 +167,18 @@ namespace FacadeRepairLibrary.DataAccess
                 currentId = facades.OrderByDescending(p => p.Id).First().Id + 1;
             }
 
-            model.Id = currentId;
+            facadeModel.Id = currentId;
 
-            //Add the new record with the new ID (max + 1)
-            facades.Add(model);
+            return facadeModel;
+        }
+ 
+        public void SaveFacede(FacadeModel facadeModel)
+        {
+            List<FacadeModel> facades = FacadeFile.FullFilePath().LoadFile().ConvertToFacadeModels(FacadeFile);
 
-            //Convert the facades to List<string>
-            //Save the List<string> to the text file
-            facades.SaveToFacadesFile(FacadesFile);
+            facades.Add(facadeModel);
 
-            return model;
-
+            facades.SaveToFacadesFile(FacadeFile);
         }
     }
 }
