@@ -9,12 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace FacadeRepairUI
 {
-    public partial class CreateFacadeForm : Form, IPolygonRequester
+    public partial class CreateFacadeForm : Form, IPolygonViewRequester, IPolygonRequester
     {
         private List<PolygonModel> polygonsOfFacade = new List<PolygonModel>();
+        IPolygonViewRequester callingPolygonViewerForm;
+        IPolygonRequester callingCreatePolygonForm;
 
         public CreateFacadeForm()
         {
@@ -26,11 +29,23 @@ namespace FacadeRepairUI
         // TODO - Wire up typeOfDamageDropDown and enum DamageType
         // TODO - Get info for polygonListBox from SavedData
 
-        private void WireUpList()
+        private void addPolygonButton_Click(object sender, EventArgs e)
         {
-            polygonsListBox.DataSource = null;
-            polygonsListBox.DataSource = polygonsOfFacade;
-            polygonsListBox.DisplayMember = "NameOfPolygon";
+            // Connect with CreatePolygonForm
+            CreatePolygonForm frm = new CreatePolygonForm(this);
+            frm.Show();
+        }
+        private void loadPolygonButton_Click(object sender, EventArgs e)
+        {
+            PolygonModel p = (PolygonModel)polygonsListBox.SelectedItem;
+
+            if (p != null)
+            {
+                // Connect with PolygonViewerForm
+                PolygonViewerForm frm = new PolygonViewerForm(this, p);
+                frm.Show();
+            }
+
         }
 
         private void createFacadeButton_Click(object sender, EventArgs e)
@@ -65,6 +80,13 @@ namespace FacadeRepairUI
             {
                 MessageBox.Show("This form has invalid information. Please check it and try again.");
             }
+        }
+
+        private void WireUpList()
+        {
+            polygonsListBox.DataSource = null;
+            polygonsListBox.DataSource = polygonsOfFacade;
+            polygonsListBox.DisplayMember = "NameOfPolygon";
         }
 
         private bool ValidateFacade ()
@@ -113,24 +135,20 @@ namespace FacadeRepairUI
             return output;
         }
 
-        private void addPolygonButton_Click(object sender, EventArgs e)
-        {
-            // Connect with CreatePolygonForm
-            //CreatePolygonForm frm = new CreatePolygonForm(this);
-            //frm.Show();
-        }
-
         public void PolygonComplete(PolygonModel polygonModel)
         {
-            throw new NotImplementedException();
+            // Get back from a form a PoligonModel
+            // Take the PolygonModel and put it into polygonsListBox
+            polygonsOfFacade.Add(polygonModel);
+            WireUpList();
         }
 
-        //public void PolygonComplete(PolygonModel polygonModel)
-        //{
-        //    // Get back from a form a PoligonModel
-        //    // Take the PolygonModel and put it into polygonsListBox
-        //    polygonsOfFacade.Add(polygonModel);
-        //    WireUpList();
-        //}
+        public void PolygonViewComplete(PolygonModel polygonModel)
+        {
+            // Get back from a form a PoligonModel
+            // Take the PolygonModel and put it into polygonsListBox
+            polygonsOfFacade.Add(polygonModel);
+            WireUpList();
+        }
     }
 }

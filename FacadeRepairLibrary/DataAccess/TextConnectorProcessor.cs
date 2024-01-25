@@ -67,7 +67,7 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
                 p.perimeter = double.Parse(cols[1]);
                 p.surfaceArea = double.Parse(cols[2]);
                 p.diameter = double.Parse(cols[3]);
-                string temp = cols[4]; // TODO - Finish coversion. List of points seperated with '|'
+                string temp = cols[4]; // TODO - Finish conversion. List of points seperated with '|'
 
                 //temp = "|(8,9)|(2,9)|(2,3)|(8,3)"
                 string[] polygonPoints = temp.Split('|');

@@ -21,12 +21,15 @@ namespace FacadeRepairUI
         private bool drawPicture = false;
 
         private PolygonModel polygonModel;
-        IPolygonRequester callingForm;
+        IPolygonViewRequester callingForm;
 
-
-        public PolygonViewerForm()
+        public PolygonViewerForm(IPolygonViewRequester caller, PolygonModel p)
         {
             InitializeComponent();
+
+            callingForm = caller;
+
+            polygonModel = p;
 
             WireUpList();
         }
@@ -44,6 +47,12 @@ namespace FacadeRepairUI
                 pointsListBox.DisplayMember = "Coordinates";
 
                 AddPolygonPoints(polygonModel.points);
+
+                if (callingForm != null)
+                {
+                    drawPicture = true;
+                    polygonRepresentationPictureBox.Invalidate();
+                }
             }
         }
 
@@ -59,7 +68,7 @@ namespace FacadeRepairUI
             //Get back from a form a PoligonModel
             // Take the PolygonModel and put it into polygonsListBox
             polygonModel = model;
-            drawPicture = !drawPicture;
+            drawPicture = true;
             polygonRepresentationPictureBox.Invalidate();
             WireUpList();
         }

@@ -215,6 +215,7 @@
             this.loadPolygonButton.TabIndex = 15;
             this.loadPolygonButton.Text = "Load Polygon";
             this.loadPolygonButton.UseVisualStyleBackColor = true;
+            this.loadPolygonButton.Click += new System.EventHandler(this.loadPolygonButton_Click);
             // 
             // dimensionsGroupBox
             // 

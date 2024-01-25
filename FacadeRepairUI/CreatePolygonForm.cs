@@ -28,6 +28,7 @@ namespace FacadeRepairUI
 
             WireUpList();
         }
+
         private void addPointButton_Click(object sender, EventArgs e)
         {
             if (ValidatePoint())
