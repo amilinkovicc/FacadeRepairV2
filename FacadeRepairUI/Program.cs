@@ -20,7 +20,7 @@ namespace FacadeRepairUI
 
             //Initialize the database connection
             FacadeRepairLibrary.GlobalConfig.InitializeConnection(DatabaseType.TextFile);
-            Application.Run(new CreateFacadeForm());
+            Application.Run(new PolygonViewerForm());
 
             //Application.Run(new PolygonViewerForm());
         }

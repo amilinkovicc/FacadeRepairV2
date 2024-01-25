@@ -116,16 +116,21 @@ namespace FacadeRepairUI
         private void addPolygonButton_Click(object sender, EventArgs e)
         {
             // Connect with CreatePolygonForm
-            CreatePolygonForm frm = new CreatePolygonForm(this);
-            frm.Show();
+            //CreatePolygonForm frm = new CreatePolygonForm(this);
+            //frm.Show();
         }
 
         public void PolygonComplete(PolygonModel polygonModel)
         {
-            // Get back from a form a PoligonModel
-            // Take the PolygonModel and put it into polygonsListBox
-            polygonsOfFacade.Add(polygonModel);
-            WireUpList();
+            throw new NotImplementedException();
         }
+
+        //public void PolygonComplete(PolygonModel polygonModel)
+        //{
+        //    // Get back from a form a PoligonModel
+        //    // Take the PolygonModel and put it into polygonsListBox
+        //    polygonsOfFacade.Add(polygonModel);
+        //    WireUpList();
+        //}
     }
 }

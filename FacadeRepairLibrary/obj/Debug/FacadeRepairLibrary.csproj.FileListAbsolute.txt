@@ -31,3 +31,14 @@ D:\AMilinkovic\Fakultet\OOP\FacadeRepairV2\FacadeRepairLibrary\obj\Debug\FacadeR
 D:\AMilinkovic\Fakultet\OOP\FacadeRepairV2\FacadeRepairLibrary\obj\Debug\FacadeRepairLibrary.csproj.CopyComplete
 D:\AMilinkovic\Fakultet\OOP\FacadeRepairV2\FacadeRepairLibrary\obj\Debug\FacadeRepairLibrary.dll
 D:\AMilinkovic\Fakultet\OOP\FacadeRepairV2\FacadeRepairLibrary\obj\Debug\FacadeRepairLibrary.pdb
+C:\Aleksa\Fakultet\OOP\Projekat\FacadeRepairV2\FacadeRepairLibrary\obj\Debug\FacadeRepairLibrary.csproj.AssemblyReference.cache
+C:\Aleksa\Fakultet\OOP\Projekat\FacadeRepairV2\FacadeRepairLibrary\obj\Debug\FacadeRepairLibrary.csproj.CoreCompileInputs.cache
+C:\Aleksa\Fakultet\OOP\Projekat\FacadeRepairV2\FacadeRepairLibrary\obj\Debug\FacadeRepairLibrary.dll
+C:\Aleksa\Fakultet\OOP\Projekat\FacadeRepairV2\FacadeRepairLibrary\obj\Debug\FacadeRepairLibrary.pdb
+C:\Aleksa\Fakultet\OOP\Projekat\FacadeRepairV2\FacadeRepairLibrary\bin\Debug\FacadeRepairLibrary.dll
+C:\Aleksa\Fakultet\OOP\Projekat\FacadeRepairV2\FacadeRepairLibrary\bin\Debug\FacadeRepairLibrary.pdb
+C:\Aleksa\Fakultet\OOP\Projekat\FacadeRepairV2\FacadeRepairLibrary\bin\Debug\Dapper.dll
+C:\Aleksa\Fakultet\OOP\Projekat\FacadeRepairV2\FacadeRepairLibrary\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Aleksa\Fakultet\OOP\Projekat\FacadeRepairV2\FacadeRepairLibrary\bin\Debug\Dapper.xml
+C:\Aleksa\Fakultet\OOP\Projekat\FacadeRepairV2\FacadeRepairLibrary\bin\Debug\System.Configuration.ConfigurationManager.xml
+C:\Aleksa\Fakultet\OOP\Projekat\FacadeRepairV2\FacadeRepairLibrary\obj\Debug\FacadeRepairLibrary.csproj.CopyComplete

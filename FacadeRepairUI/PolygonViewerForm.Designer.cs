@@ -37,7 +37,7 @@
             this.polygonPerimeterLabel = new System.Windows.Forms.Label();
             this.polygonDiametreValue = new System.Windows.Forms.Label();
             this.polygonPerimeterValue = new System.Windows.Forms.Label();
-            this.objectAddressValue = new System.Windows.Forms.Label();
+            this.polygonSurfaceAreaValue = new System.Windows.Forms.Label();
             this.polygonSurfaceAreaLabel = new System.Windows.Forms.Label();
             this.polygonDiametreLabel = new System.Windows.Forms.Label();
             this.pointsListBox = new System.Windows.Forms.ListBox();
@@ -97,7 +97,7 @@
             this.polygonInfoGroupBox.Controls.Add(this.polygonPerimeterLabel);
             this.polygonInfoGroupBox.Controls.Add(this.polygonDiametreValue);
             this.polygonInfoGroupBox.Controls.Add(this.polygonPerimeterValue);
-            this.polygonInfoGroupBox.Controls.Add(this.objectAddressValue);
+            this.polygonInfoGroupBox.Controls.Add(this.polygonSurfaceAreaValue);
             this.polygonInfoGroupBox.Controls.Add(this.polygonSurfaceAreaLabel);
             this.polygonInfoGroupBox.Controls.Add(this.polygonDiametreLabel);
             this.polygonInfoGroupBox.Location = new System.Drawing.Point(714, 125);
@@ -123,7 +123,7 @@
             this.polygonDiametreValue.AutoSize = true;
             this.polygonDiametreValue.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.polygonDiametreValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.polygonDiametreValue.Location = new System.Drawing.Point(324, 167);
+            this.polygonDiametreValue.Location = new System.Drawing.Point(318, 167);
             this.polygonDiametreValue.Name = "polygonDiametreValue";
             this.polygonDiametreValue.Size = new System.Drawing.Size(113, 37);
             this.polygonDiametreValue.TabIndex = 24;
@@ -134,22 +134,22 @@
             this.polygonPerimeterValue.AutoSize = true;
             this.polygonPerimeterValue.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.polygonPerimeterValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.polygonPerimeterValue.Location = new System.Drawing.Point(324, 49);
+            this.polygonPerimeterValue.Location = new System.Drawing.Point(318, 49);
             this.polygonPerimeterValue.Name = "polygonPerimeterValue";
             this.polygonPerimeterValue.Size = new System.Drawing.Size(113, 37);
             this.polygonPerimeterValue.TabIndex = 20;
             this.polygonPerimeterValue.Text = "<none>";
             // 
-            // objectAddressValue
+            // polygonSurfaceAreaValue
             // 
-            this.objectAddressValue.AutoSize = true;
-            this.objectAddressValue.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.objectAddressValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.objectAddressValue.Location = new System.Drawing.Point(324, 108);
-            this.objectAddressValue.Name = "objectAddressValue";
-            this.objectAddressValue.Size = new System.Drawing.Size(113, 37);
-            this.objectAddressValue.TabIndex = 23;
-            this.objectAddressValue.Text = "<none>";
+            this.polygonSurfaceAreaValue.AutoSize = true;
+            this.polygonSurfaceAreaValue.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.polygonSurfaceAreaValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
+            this.polygonSurfaceAreaValue.Location = new System.Drawing.Point(318, 108);
+            this.polygonSurfaceAreaValue.Name = "polygonSurfaceAreaValue";
+            this.polygonSurfaceAreaValue.Size = new System.Drawing.Size(113, 37);
+            this.polygonSurfaceAreaValue.TabIndex = 23;
+            this.polygonSurfaceAreaValue.Text = "<none>";
             // 
             // polygonSurfaceAreaLabel
             // 
@@ -208,6 +208,7 @@
             this.editPolygonButton.TabIndex = 29;
             this.editPolygonButton.Text = "Edit Polygon";
             this.editPolygonButton.UseVisualStyleBackColor = true;
+            this.editPolygonButton.Click += new System.EventHandler(this.editPolygonButton_Click);
             // 
             // boundingBoxButton
             // 
@@ -262,7 +263,7 @@
         private System.Windows.Forms.Label polygonPerimeterLabel;
         private System.Windows.Forms.Label polygonDiametreValue;
         private System.Windows.Forms.Label polygonPerimeterValue;
-        private System.Windows.Forms.Label objectAddressValue;
+        private System.Windows.Forms.Label polygonSurfaceAreaValue;
         private System.Windows.Forms.Label polygonSurfaceAreaLabel;
         private System.Windows.Forms.Label polygonDiametreLabel;
         private System.Windows.Forms.ListBox pointsListBox;

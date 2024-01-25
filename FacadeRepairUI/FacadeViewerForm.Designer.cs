@@ -193,7 +193,7 @@
             this.facadeRepresentationPicturebox.BackColor = System.Drawing.Color.Silver;
             this.facadeRepresentationPicturebox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.facadeRepresentationPicturebox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.facadeRepresentationPicturebox.Location = new System.Drawing.Point(4, 119);
+            this.facadeRepresentationPicturebox.Location = new System.Drawing.Point(2, 127);
             this.facadeRepresentationPicturebox.Name = "facadeRepresentationPicturebox";
             this.facadeRepresentationPicturebox.Size = new System.Drawing.Size(630, 872);
             this.facadeRepresentationPicturebox.TabIndex = 5;

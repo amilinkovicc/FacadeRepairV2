@@ -18,6 +18,8 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
 {
     public static class TextConnectorProcessor
     {
+        // TODO - DELETE?
+
         public static string FullFilePath (this string fileName) //PointModel.csv
         {
             return $"{ConfigurationManager.AppSettings["filePath"]}\\{fileName}";
@@ -33,24 +35,24 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
             return File.ReadAllLines(file).ToList();
         }
 
-        public static List<PointModel> ConvertToPointModels(this List<string> lines)
-        {
-            List<PointModel> output = new List<PointModel>();
+        //public static List<PointModel> ConvertToPointModels(this List<string> lines)
+        //{
+        //    List<PointModel> output = new List<PointModel>();
 
-            foreach (string line in lines)
-            {
-                string[] cols = line.Split(';');
+        //    foreach (string line in lines)
+        //    {
+        //        string[] cols = line.Split(';');
 
-                PointModel p = new PointModel();
-                p.Id = int.Parse(cols[0]);
-                p.x = double.Parse(cols[1]);
-                p.y = double.Parse(cols[2]);
-                // TODO Add PolygonId
-                output.Add(p);
-            }
+        //        PointModel p = new PointModel();
+        //        p.Id = int.Parse(cols[0]);
+        //        p.x = double.Parse(cols[0]);
+        //        p.y = double.Parse(cols[1]);
+        //        // TODO Add PolygonId
+        //        output.Add(p);
+        //    }
 
-            return output;
-        }
+        //    return output;
+        //}
 
         public static List<PolygonModel> ConvertToPolygonModels(this List<string> lines, string pointsFileName)
         {
@@ -58,7 +60,7 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
 
             foreach (string line in lines)
             {
-                string[] cols = line.Split(';');
+                string[] cols = line.Split(',');
                 
                 PolygonModel p = new PolygonModel();
                 p.Id = int.Parse(cols[0]);
@@ -69,9 +71,9 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
 
                 //temp = "|(8,9)|(2,9)|(2,3)|(8,3)"
                 string[] polygonPoints = temp.Split('|');
-                for (int i = 1, n = polygonPoints.Count(); i < n; i++)
+                for (int i = 1, n = polygonPoints.Count(); i < n; i++) //* i starts from 1 because polygonPoints[0] = ""
                 {
-                    //(8,9)
+                    //(8 9)
                     p.points.Add(new PointModel(Convert.ToString(polygonPoints[i][1]), Convert.ToString(polygonPoints[i][3])));
                     char charX = polygonPoints[i][1];
                 }
@@ -105,17 +107,17 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
             return output;
         }
 
-        public static void SaveToPointsFile(this List<PointModel> models, string fileName)
-        {
-            List<string> lines = new List<string>();
+        //public static void SaveToPointsFile(this List<PointModel> models, string fileName)
+        //{
+        //    List<string> lines = new List<string>();
 
-            foreach(PointModel p in models)
-            {
-                lines.Add($"{p.Id};{p.x};{p.y}");
-            }
+        //    foreach(PointModel p in models)
+        //    {
+        //        lines.Add($"{p.Id};{p.x};{p.y}");
+        //    }
 
-            File.WriteAllLines(fileName.FullFilePath(), lines);
-        }
+        //    File.WriteAllLines(fileName.FullFilePath(), lines);
+        //}
 
         public static void SaveToPolygonsFile(this List<PolygonModel> models, string fileName)
         {
@@ -126,10 +128,10 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
                 string listOfPoints = "";
                 for (int i = 0, m = polygon.points.Count(); i < m; i++)
                 {
-                    listOfPoints += "|" + polygon.points[i].Cordinates;
+                    listOfPoints += "|" + polygon.points[i].Coordinates;
                 }
 
-                lines.Add($"{polygon.Id};{polygon.perimeter};{polygon.surfaceArea};{polygon.diameter};{listOfPoints}");
+                lines.Add($"{polygon.Id},{polygon.perimeter},{polygon.surfaceArea},{polygon.diameter},{listOfPoints}");
             }
 
             File.WriteAllLines(fileName.FullFilePath(), lines);

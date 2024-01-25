@@ -18,9 +18,9 @@ namespace FacadeRepairUI
     {
         private List<PointModel> pointsOfPolygon = new List<PointModel>();
 
-        IPolygonRequester callingForm;
+        IPolygonViewRequester callingForm;
 
-        public CreatePolygonForm(IPolygonRequester caller)
+        public CreatePolygonForm(IPolygonViewRequester caller)
         {
             InitializeComponent();
 
@@ -28,12 +28,78 @@ namespace FacadeRepairUI
 
             WireUpList();
         }
+        private void addPointButton_Click(object sender, EventArgs e)
+        {
+            if (ValidatePoint())
+            {
+                PointModel p = new PointModel(xValue.Text, yValue.Text);
 
+                // TODO - DELETE?
+                //p = GlobalConfig.Connection.CreatePoint(p);
+
+                pointsOfPolygon.Add(p);
+
+                WireUpList();
+
+                xValue.Text = "";
+                yValue.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("This form has invalid information. Please check it and try again.");
+            }
+        }
+
+        private void editPointButton_Click(object sender, EventArgs e)
+        {
+            PointModel p = (PointModel)pointsListBox.SelectedItem;
+
+            if (p != null)
+            {
+                p.x = double.Parse(xValue.Text);
+                p.y = double.Parse(yValue.Text);
+
+
+                WireUpList();
+            }
+        }
+
+        private void deletePointButton_Click(object sender, EventArgs e)
+        {
+            PointModel p = (PointModel)pointsListBox.SelectedItem;
+
+            if (p != null)
+            {
+                pointsOfPolygon.Remove(p);
+
+                WireUpList();
+            }
+        }
+
+        private void createPolygonButton_Click(object sender, EventArgs e)
+        {
+            if (ValidatePolygon())
+            {
+                PolygonModel polygon = new PolygonModel();
+
+                polygon.points = pointsOfPolygon;
+
+                GlobalConfig.Connection.CreatePolygonId(polygon);
+
+                GlobalConfig.Connection.SavePolygon(polygon);
+
+                callingForm.PolygonComplete(polygon);
+
+                // TODO - If we aren't closing this form after creation, reset the form.
+                this.Close();
+            }
+        }
+               
         private void WireUpList()
         {
             pointsListBox.DataSource = null;
             pointsListBox.DataSource = pointsOfPolygon;
-            pointsListBox.DisplayMember = "Cordinates";
+            pointsListBox.DisplayMember = "Coordinates";
         }
 
         /// <summary>
@@ -50,43 +116,6 @@ namespace FacadeRepairUI
 
         }
 
-        private void createPolygonButton_Click(object sender, EventArgs e)
-        {
-            if (ValidatePolygon())
-            {
-                PolygonModel polygon = new PolygonModel();
-
-                polygon.points = pointsOfPolygon;
-
-                polygon = GlobalConfig.Connection.CreatePolygon(polygon);
-
-                callingForm.PolygonComplete(polygon);
-
-                // TODO - If we aren't closing this form after creation, reset the form.
-                this.Close();
-            }
-        }
-
-        private void addPointButton_Click(object sender, EventArgs e)
-        {
-            if (ValidatePoint())
-            {
-                PointModel p = new PointModel(xValue.Text, yValue.Text);
-
-                p = GlobalConfig.Connection.CreatePoint(p);
-
-                pointsOfPolygon.Add(p);
-
-                WireUpList();
-
-                xValue.Text = "";
-                yValue.Text = "";
-            }
-            else
-            {
-                MessageBox.Show("This form has invalid information. Please check it and try again.");
-            }
-        }
 
         /// <summary>
         /// Checks if the coordinates of the point are valid.
@@ -95,16 +124,16 @@ namespace FacadeRepairUI
         private bool ValidatePoint()
         {
             bool output = true;
-            int x = 0, y = 0;
+            double x = 0, y = 0;
 
-            if (!(int.TryParse(xValue.Text, out x)))
+            if (!(double.TryParse(xValue.Text, out x)))
             {
                 // You can just return false in every if and at the end return true.
                 // This way if you add messages that explain what is wrong with the input, user will get all messages at once instead one by one.
                 output = false;
             }
 
-            if (!(int.TryParse(yValue.Text, out y)))
+            if (!(double.TryParse(yValue.Text, out y)))
             {
                 output = false;
             }
@@ -115,6 +144,10 @@ namespace FacadeRepairUI
             }
 
             // TODO - It shouldn't be possible to add point out of facade.
+            //if (x > width || y > height)
+            //{
+            //    output = false;
+            //}
 
             return output;
         }
@@ -128,35 +161,17 @@ namespace FacadeRepairUI
             return output;
         }
 
-        private void deletePointButton_Click(object sender, EventArgs e)
-        {
-            PointModel p = (PointModel)pointsListBox.SelectedItem;
-
-            if ( p != null )
-            {
-                pointsOfPolygon = GlobalConfig.Connection.DeletePoint(p);
-                WireUpList();
-            }
-        }
-
         private void pointsListBox_MouseClick(object sender, MouseEventArgs e)
         {
             UpdateSelectedValues();
         }
 
-        private void editPointButton_Click(object sender, EventArgs e)
+        public void PolygonComplete(PolygonModel polygonModel)
         {
-            PointModel p = (PointModel)pointsListBox.SelectedItem;
-
-            if (p != null)
-            {
-                List<PointModel> editedPoints = new List<PointModel>();
-                editedPoints = GlobalConfig.Connection.EditPoint(p, xValue.Text, yValue.Text);
-
-                pointsOfPolygon = editedPoints;
-
-                WireUpList();
-            }
+            // Get back from a form a PoligonModel
+            // Take the PolygonModel and put it into polygonsListBox
+            //polygonsOfFacade.Add(polygonModel);
+            //WireUpList();
         }
     }
 }

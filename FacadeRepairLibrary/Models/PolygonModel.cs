@@ -20,7 +20,7 @@ namespace FacadeRepairLibrary.Model
         /// List of points defining the polygon.
         /// </summary>
         public List<PointModel> points { get; set; } = new List<PointModel>();
-
+        
         /// <summary>
         /// The perimeter of the polygon.
         /// </summary>

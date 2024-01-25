@@ -13,15 +13,17 @@ namespace FacadeRepairLibrary.DataAccess
     /// </summary>
     public interface IDataConnection
     {
-        PointModel CreatePoint(PointModel pointModel);
+        //PointModel CreatePoint(PointModel pointModel);
 
-        List<PointModel> DeletePoint(PointModel pointModel);
+        //List<PointModel> DeletePoint(PointModel pointModel);
 
-        List<PointModel> EditPoint(PointModel polygonModel, string xValue, string yValue);
+        //List<PointModel> EditPoint(PointModel polygonModel, string xValue, string yValue);
 
-        List<PointModel> GetPointsAll();
+        //List<PointModel> GetPointsAll();
 
-        PolygonModel CreatePolygon(PolygonModel polygonModel);
+        PolygonModel CreatePolygonId(PolygonModel polygonModel);
+
+        void SavePolygon(PolygonModel polygonModel);
 
         FacadeModel CreateFacade(FacadeModel facadeModel);
     }
