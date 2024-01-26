@@ -31,12 +31,10 @@ namespace FacadeRepairLibrary.Model
 
         public PointModel(string xValue, string yValue)
         {
-            double xValueNumber = 0;
-            double.TryParse(xValue, out xValueNumber);
+            double.TryParse(xValue, out double xValueNumber);
             x = xValueNumber;
 
-            double yValueNumber = 0;
-            double.TryParse(yValue, out yValueNumber);
+            double.TryParse(yValue, out double yValueNumber);
             y = yValueNumber;
         }
 

@@ -10,5 +10,7 @@ namespace FacadeRepairUI
     public interface IPolygonRequester
     {
         void PolygonComplete(PolygonModel polygonModel);
+
+        string PolygonName();
     }
 }

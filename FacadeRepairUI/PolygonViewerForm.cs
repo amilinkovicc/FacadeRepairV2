@@ -15,13 +15,13 @@ namespace FacadeRepairUI
 {
     public partial class PolygonViewerForm : Form, IPolygonRequester
     {
-        private const int Height = 850;
-        private const int Width = 630;
-        private List<Point> points = new List<Point>();
+        private const int polygonHeight = 850;
+        private const int polygonWidth = 630;
+        private readonly List<Point> points = new List<Point>();
         private bool drawPicture = false;
 
-        private PolygonModel polygonModel;
-        IPolygonViewRequester callingForm;
+        PolygonModel mainPolygon;
+        private readonly IPolygonViewRequester callingForm;
 
         public PolygonViewerForm(IPolygonViewRequester caller, PolygonModel p)
         {
@@ -29,7 +29,7 @@ namespace FacadeRepairUI
 
             callingForm = caller;
 
-            polygonModel = p;
+            mainPolygon = p;
 
             WireUpList();
         }
@@ -37,16 +37,16 @@ namespace FacadeRepairUI
         private void WireUpList()
         {
             pointsListBox.DataSource = null;
-            if (polygonModel != null)
+            if (mainPolygon != null)
             {
-                polygonNameValue.Text = polygonModel.NameOfPolygon;
-                polygonPerimeterValue.Text = Convert.ToString(Math.Round(polygonModel.perimeter, 4));
-                polygonSurfaceAreaValue.Text = Convert.ToString(Math.Round(polygonModel.surfaceArea, 4));
-                polygonDiametreValue.Text = Convert.ToString(Math.Round(polygonModel.diameter, 4));
-                pointsListBox.DataSource = polygonModel.points;
+                polygonNameValue.Text = mainPolygon.NameOfPolygon;
+                polygonPerimeterValue.Text = Convert.ToString(Math.Round(mainPolygon.perimeter, 4));
+                polygonSurfaceAreaValue.Text = Convert.ToString(Math.Round(mainPolygon.surfaceArea, 4));
+                polygonDiametreValue.Text = Convert.ToString(Math.Round(mainPolygon.diameter, 4));
+                pointsListBox.DataSource = mainPolygon.points;
                 pointsListBox.DisplayMember = "Coordinates";
 
-                AddPolygonPoints(polygonModel.points);
+                AddPolygonPoints(mainPolygon.points);
 
                 if (callingForm != null)
                 {
@@ -59,25 +59,15 @@ namespace FacadeRepairUI
         private void editPolygonButton_Click(object sender, EventArgs e)
         {
             // Connect with CreatePolygonForm
-            CreatePolygonForm frm = new CreatePolygonForm(this);
+            CreatePolygonForm frm = new CreatePolygonForm(this, mainPolygon);
             frm.Show();
-        }
-
-        public void PolygonComplete(PolygonModel model)
-        {
-            //Get back from a form a PoligonModel
-            // Take the PolygonModel and put it into polygonsListBox
-            polygonModel = model;
-            drawPicture = true;
-            polygonRepresentationPictureBox.Invalidate();
-            WireUpList();
         }
 
         public void AddPolygonPoints(List<PointModel> polygonPoints)
         {
             // Calculate relation between image size and PictureBox size and scale coordinates according to it
-            double scaleX = (Width - 30) / polygonPoints.Max(p => p.x);
-            double scaleY = (Height - 50) / polygonPoints.Max(p => p.y);
+            double scaleX = (polygonWidth - 30) / polygonPoints.Max(p => p.x);
+            double scaleY = (polygonHeight - 50) / polygonPoints.Max(p => p.y);
 
             // Load polygon points
             foreach (PointModel p in polygonPoints)
@@ -98,6 +88,21 @@ namespace FacadeRepairUI
                 graphic.DrawPolygon(Pens.Black, points.ToArray());
                 graphic.FillPolygon(Brushes.Blue, points.ToArray());
             }
+        }
+
+        public void PolygonComplete(PolygonModel model)
+        {
+            //Get back from a form a PoligonModel
+            // Take the PolygonModel and put it into polygonsListBox
+            mainPolygon = model;
+            drawPicture = true;
+            polygonRepresentationPictureBox.Invalidate();
+            WireUpList();
+        }
+
+        public string PolygonName()
+        {
+            throw new NotImplementedException();
         }
     }
 }

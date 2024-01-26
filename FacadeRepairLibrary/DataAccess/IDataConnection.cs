@@ -8,20 +8,12 @@ using FacadeRepairLibrary.Model;
 
 namespace FacadeRepairLibrary.DataAccess
 {
-    // TODO summary
+    // TODO LOOK summary
     /// <summary>
-    /// 
+    /// Interface for XMLConnector, XLSXConnector and CSVConnector
     /// </summary>
     public interface IDataConnection
     {
-        //PointModel CreatePoint(PointModel pointModel);
-
-        //List<PointModel> DeletePoint(PointModel pointModel);
-
-        //List<PointModel> EditPoint(PointModel polygonModel, string xValue, string yValue);
-
-        //List<PointModel> GetPointsAll();
-
         PolygonModel CreatePolygonId(PolygonModel polygonModel);
 
         void SavePolygon(PolygonModel polygonModel);
@@ -31,5 +23,7 @@ namespace FacadeRepairLibrary.DataAccess
         FacadeModel CreateFacadeId(FacadeModel facadeModel);
 
         void SaveFacede(FacadeModel facadeModel);
+
+        List<FacadeModel> GetAllFacades();
     }
 }

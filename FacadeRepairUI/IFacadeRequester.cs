@@ -10,5 +10,7 @@ namespace FacadeRepairUI
     public interface IFacadeRequester
     {
         void FacadeComplete(FacadeModel facadeModel);
+
+        string FacadeName();
     }
 }

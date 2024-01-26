@@ -47,9 +47,14 @@ namespace FacadeRepairLibrary.Model
         public DamageType damageType { get; set; }
 
         /// <summary>
-        /// List of the polygonsId of the object that you're working on.
+        /// The price of fixing the object.
         /// </summary>
-        public List<int> polygonsId { get; set; } = new List<int>();
+        public double price
+        {
+            // TODO - Add price from FacadeViewerForm
+            get { return Price(damageType, polygons); }
+            set { }
+        }
 
         /// <summary>
         /// List of the polygons of the object that you're working on.
@@ -58,7 +63,12 @@ namespace FacadeRepairLibrary.Model
 
         public string NameOfFacade
         {
-            get { return $"Facade {Id}"; } // TODO - Come up with better names for polygons
+            get { return $"Facade {Id}, {objectName}"; } // TODO - Come up with better names for polygons
+        }
+
+        private double Price(DamageType damageType, List<PolygonModel> polygons)
+        {
+
         }
     }
 }

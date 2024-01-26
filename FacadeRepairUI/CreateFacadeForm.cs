@@ -13,19 +13,27 @@ using System.Reflection;
 
 namespace FacadeRepairUI
 {
-    public partial class CreateFacadeForm : Form, IPolygonViewRequester, IPolygonRequester
+    public partial class CreateFacadeForm : Form, IFacadeViewRequester, IPolygonRequester, IPolygonViewRequester
     {
-        private List<PolygonModel> polygonsOfFacade = new List<PolygonModel>();
-        IPolygonViewRequester callingPolygonViewerForm;
-        IPolygonRequester callingCreatePolygonForm;
-
-        IFacadeRequester callingCreateFacadeForm;
+        private readonly IFacadeRequester callingForm;
+        private readonly FacadeModel mainFacade = new FacadeModel();
 
         public CreateFacadeForm(IFacadeRequester caller)
         {
             InitializeComponent();
 
-            callingCreateFacadeForm = caller;
+            callingForm = caller;
+
+            WireUpList();
+        }
+
+        public CreateFacadeForm(IFacadeRequester caller, FacadeModel f)
+        {
+            InitializeComponent();
+
+            callingForm = caller;
+
+            mainFacade = f;
 
             WireUpList();
         }
@@ -63,7 +71,7 @@ namespace FacadeRepairUI
 
             if (p != null)
             {
-                polygonsOfFacade.Remove(p);
+                mainFacade.polygons.Remove(p);
 
                 WireUpList();
             }
@@ -73,30 +81,35 @@ namespace FacadeRepairUI
         {
             if (ValidateFacade())
             {
-                FacadeModel facade = new FacadeModel();
+                mainFacade.objectName = objectNameValue.Text;
+                mainFacade.objectAddress = objectAddressValue.Text;
+                mainFacade.objectOwner = objectOwnerValue.Text;
+                mainFacade.objectWidth = double.Parse(objectWidthValue.Text);
+                mainFacade.objectHeight = double.Parse(objectHeightValue.Text);
+                mainFacade.damageType = (DamageType)Enum.Parse(typeof(DamageType), typeOfDamageDropDown.Text, true);
 
-                facade.objectName = objectNameValue.Text;
-                facade.objectAddress = objectAddressValue.Text;
-                facade.objectOwner = objectOwnerValue.Text;
-                facade.objectWidth = double.Parse(objectWidthValue.Text);
-                facade.objectHeight = double.Parse(objectHeightValue.Text);
-                facade.damageType = (DamageType)Enum.Parse(typeof(DamageType), typeOfDamageDropDown.Text, true);
-
-                DamageType.TryParse(typeOfDamageDropDown.Text, out DamageType damage);
+                //DamageType.TryParse(typeOfDamageDropDown.Text, out DamageType damage);
                 
-                if (damage == DamageType.Partially)
+                //if (damage == DamageType.Partially)
+                //{
+                //    facade.polygons = mainFacade.polygons; 
+                //}
+
+                GlobalConfig.Connection.CreateFacadeId(mainFacade);
+                GlobalConfig.Connection.SaveFacede(mainFacade);
+
+                if (callingForm.FacadeName() == "FacadeDashboardForm")
                 {
-                    facade.polygons = polygonsOfFacade; 
+                    // Connect with FacadeViewerForm
+                    FacadeViewerForm frm = new FacadeViewerForm(this, mainFacade);
+                    frm.Show();
+                    this.Close();
                 }
-
-                GlobalConfig.Connection.CreateFacadeId(facade);
-                GlobalConfig.Connection.SaveFacede(facade);
-
-                // TODO - Connect this form with FacadeViewerForm
-                //callingForm.PolygonComplete(polygon);
-
-                // TODO - If we aren't closing this form after creation, reset the form.
-                this.Close();
+                else if (callingForm.FacadeName() == "FacadeViewerForm")
+                {
+                    callingForm.FacadeComplete(mainFacade);
+                    this.Close();
+                }
             }
             else
             {
@@ -107,7 +120,7 @@ namespace FacadeRepairUI
         private void WireUpList()
         {
             polygonsListBox.DataSource = null;
-            polygonsListBox.DataSource = polygonsOfFacade;
+            polygonsListBox.DataSource = mainFacade.polygons;
             polygonsListBox.DisplayMember = "NameOfPolygon";
         }
 
@@ -130,14 +143,12 @@ namespace FacadeRepairUI
                 output = false;
             }
 
-            int height = 0, width = 0;
-
-            if (!(int.TryParse(objectHeightValue.Text, out height)))
+            if (!(int.TryParse(objectHeightValue.Text, out int height)))
             {
                 output = false;
             }
 
-            if (!(int.TryParse(objectWidthValue.Text, out width)))
+            if (!(int.TryParse(objectWidthValue.Text, out int width)))
             {
                 output = false;
             }
@@ -147,9 +158,7 @@ namespace FacadeRepairUI
                 output = false;
             }
 
-            DamageType damageType;
-
-            if(!(Enum.TryParse(typeOfDamageDropDown.Text, true, out damageType)))
+            if (!Enum.TryParse(typeOfDamageDropDown.Text, true, out DamageType _))
             {
                 output = false;
             }
@@ -157,21 +166,38 @@ namespace FacadeRepairUI
             return output;
         }
 
+        public void FacadeViewComplete(FacadeModel facadeModel)
+        {
+            //Nothing to do here.
+            // TODO - Maybe invent some better algorithm?
+        }
+
         public void PolygonComplete(PolygonModel polygonModel)
         {
-            // Get back from a form a PoligonModel
-            // Take the PolygonModel and put it into polygonsListBox
-            polygonsOfFacade.Add(polygonModel);
+            // Get back from a form a PolygonModel
+            // Take the PolygonModel, add it to FacadeModel.polygons and update polygonsListBox
+            mainFacade.polygons.Add(polygonModel);
             WireUpList();
         }
 
         public void PolygonViewComplete(PolygonModel polygonModel)
         {
-            // Get back from a form a PoligonModel
-            // Take the PolygonModel and put it into polygonsListBox
-            polygonsOfFacade.Add(polygonModel);
+            // Get back from a form a PolygonModel
+            // Take that PolygonModel, substitute previous one with it and update polygonsListBox
+            for (int i = 0, n = mainFacade.polygons.Count; i < n; i++)
+            {
+                if (mainFacade.polygons[i].Id == polygonModel.Id)
+                {
+                    mainFacade.polygons[i] = polygonModel;
+                }
+            }
+
             WireUpList();
         }
 
+        public string PolygonName()
+        {
+            return this.Name;
+        }
     }
 }

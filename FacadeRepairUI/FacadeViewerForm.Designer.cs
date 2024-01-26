@@ -84,7 +84,7 @@
             this.objectInfoGroupBox.Controls.Add(this.objectNameLabel);
             this.objectInfoGroupBox.Location = new System.Drawing.Point(666, 119);
             this.objectInfoGroupBox.Name = "objectInfoGroupBox";
-            this.objectInfoGroupBox.Size = new System.Drawing.Size(394, 296);
+            this.objectInfoGroupBox.Size = new System.Drawing.Size(551, 296);
             this.objectInfoGroupBox.TabIndex = 2;
             this.objectInfoGroupBox.TabStop = false;
             this.objectInfoGroupBox.Text = "Object Info";
@@ -94,7 +94,7 @@
             this.damageTypeValue.AutoSize = true;
             this.damageTypeValue.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.damageTypeValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.damageTypeValue.Location = new System.Drawing.Point(275, 227);
+            this.damageTypeValue.Location = new System.Drawing.Point(242, 227);
             this.damageTypeValue.Name = "damageTypeValue";
             this.damageTypeValue.Size = new System.Drawing.Size(113, 37);
             this.damageTypeValue.TabIndex = 14;
@@ -105,7 +105,7 @@
             this.objectOwnerValue.AutoSize = true;
             this.objectOwnerValue.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.objectOwnerValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.objectOwnerValue.Location = new System.Drawing.Point(275, 168);
+            this.objectOwnerValue.Location = new System.Drawing.Point(242, 168);
             this.objectOwnerValue.Name = "objectOwnerValue";
             this.objectOwnerValue.Size = new System.Drawing.Size(113, 37);
             this.objectOwnerValue.TabIndex = 13;
@@ -116,7 +116,7 @@
             this.objectAddressValue.AutoSize = true;
             this.objectAddressValue.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.objectAddressValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.objectAddressValue.Location = new System.Drawing.Point(275, 109);
+            this.objectAddressValue.Location = new System.Drawing.Point(242, 109);
             this.objectAddressValue.Name = "objectAddressValue";
             this.objectAddressValue.Size = new System.Drawing.Size(113, 37);
             this.objectAddressValue.TabIndex = 12;
@@ -160,7 +160,7 @@
             this.objectNameValue.AutoSize = true;
             this.objectNameValue.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.objectNameValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.objectNameValue.Location = new System.Drawing.Point(275, 50);
+            this.objectNameValue.Location = new System.Drawing.Point(242, 50);
             this.objectNameValue.Name = "objectNameValue";
             this.objectNameValue.Size = new System.Drawing.Size(113, 37);
             this.objectNameValue.TabIndex = 4;
@@ -198,6 +198,7 @@
             this.facadeRepresentationPicturebox.Size = new System.Drawing.Size(630, 872);
             this.facadeRepresentationPicturebox.TabIndex = 5;
             this.facadeRepresentationPicturebox.TabStop = false;
+            this.facadeRepresentationPicturebox.Paint += new System.Windows.Forms.PaintEventHandler(this.facadeRepresentationPicturebox_Paint);
             // 
             // editFacadeButton
             // 
@@ -207,7 +208,7 @@
             this.editFacadeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editFacadeButton.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.editFacadeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.editFacadeButton.Location = new System.Drawing.Point(751, 796);
+            this.editFacadeButton.Location = new System.Drawing.Point(829, 808);
             this.editFacadeButton.Name = "editFacadeButton";
             this.editFacadeButton.Size = new System.Drawing.Size(225, 59);
             this.editFacadeButton.TabIndex = 15;
@@ -220,9 +221,9 @@
             this.polygonsListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.polygonsListBox.FormattingEnabled = true;
             this.polygonsListBox.ItemHeight = 30;
-            this.polygonsListBox.Location = new System.Drawing.Point(666, 458);
+            this.polygonsListBox.Location = new System.Drawing.Point(666, 470);
             this.polygonsListBox.Name = "polygonsListBox";
-            this.polygonsListBox.Size = new System.Drawing.Size(394, 332);
+            this.polygonsListBox.Size = new System.Drawing.Size(551, 332);
             this.polygonsListBox.TabIndex = 17;
             // 
             // polygonsLabel
@@ -230,7 +231,7 @@
             this.polygonsLabel.AutoSize = true;
             this.polygonsLabel.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.polygonsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.polygonsLabel.Location = new System.Drawing.Point(671, 418);
+            this.polygonsLabel.Location = new System.Drawing.Point(670, 430);
             this.polygonsLabel.Name = "polygonsLabel";
             this.polygonsLabel.Size = new System.Drawing.Size(125, 37);
             this.polygonsLabel.TabIndex = 16;
@@ -244,7 +245,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.button1.Location = new System.Drawing.Point(712, 912);
+            this.button1.Location = new System.Drawing.Point(790, 912);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(303, 79);
             this.button1.TabIndex = 18;
@@ -257,7 +258,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1084, 1011);
+            this.ClientSize = new System.Drawing.Size(1229, 1011);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.polygonsListBox);
             this.Controls.Add(this.polygonsLabel);

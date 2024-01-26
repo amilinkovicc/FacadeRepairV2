@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FacadeRepairLibrary.Model;
 using FacadeRepairLibrary.DataAccess.TextHelpers;
 using System.Reflection;
+using System.Data.OleDb;
 
 namespace FacadeRepairLibrary.DataAccess
 {
@@ -13,103 +14,15 @@ namespace FacadeRepairLibrary.DataAccess
     {
         private const string PolygonFile = "PolygonModels.csv";
         private const string FacadeFile = "FacadeModels.csv";
-        private PolygonModel chosenPolygon;
-
-        // TODO - write summaries
 
         /// <summary>
-        /// Saves a new point to the Text file. TODO - Incorrect (from text to model)
+        /// Updates Id value in the polygon properties.
         /// </summary>
-        /// <param name="model">The point informations.</param>
-        /// <returns>The point informations, including the unique identifier.</returns>
-        //public PointModel CreatePoint(PointModel pointModel)
-        //{
-        //    //Load the text file and Convert the text to List<PointModel>
-        //    List<PointModel> points = PointsFile.FullFilePath().LoadFile().ConvertToPointModels();
-
-        //    //Find the max ID
-        //    int currentId = 1;
-
-        //    if (points.Count > 0)
-        //    {
-        //        currentId = points.OrderByDescending(p => p.Id).First().Id + 1;
-        //    }
-
-        //    pointModel.Id = currentId;
-
-        //    //Add the new record with the new ID (max + 1)
-        //    points.Add(pointModel);
-
-        //    //Convert the prizes to List<string>
-        //    //Save the List<string> to the text file
-        //    points.SaveToPointsFile(PointsFile);
-
-        //    return pointModel;
-        //}
-
-        /// <summary>
-        /// Deletes selected point from .csv file.
-        /// </summary>
-        /// <param name="pointModel">Selected point - point we want to delete from list.</param>
-        /// <returns>New list of PointModels. Contains all points except the deleted one.</returns>
-        //public List<PointModel> DeletePoint(PointModel pointModel)
-        //{
-        //    List<PointModel> points = PointsFile.FullFilePath().LoadFile().ConvertToPointModels();
-
-        //    for (int i = pointModel.Id, n = points.Count(); i < n; i++)
-        //    {
-        //        points[i - 1] = points[i];
-        //        points[i - 1].Id -= 1;
-        //    }
-        //    points.RemoveAt(points.Count - 1);
-
-        //    points.SaveToPointsFile(PointsFile);
-
-        //    return points;
-        //}
-
-        /// <summary>
-        /// Edits selected point from .csv file.
-        /// </summary>
-        /// <param name="model"></param>
-        /// <param name="xValue"></param>
-        /// <param name="yValue"></param>
-        /// <returns></returns>
-        //public List<PointModel> EditPoint(PointModel model, string xValue, string yValue)
-        //{
-        //    List<PointModel> points = PointsFile.FullFilePath().LoadFile().ConvertToPointModels();
-
-        //    foreach (PointModel point in points)
-        //    {
-        //        if (point.Id == model.Id)
-        //        {
-        //            point.x = double.Parse(xValue);
-        //            point.y = double.Parse(yValue);
-        //        }
-        //    }
-
-        //    points.SaveToPointsFile(PointsFile);
-
-        //    return points;
-        //}
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        //public List<PointModel> GetPointsAll()
-        //{
-        //    return PointsFile.FullFilePath().LoadFile().ConvertToPointModels();
-        //}
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="polygonModel">The polygon informations.This polygon doesn't have the (correct) Id value.</param>
+        /// <returns>The polygon informations, including the unique identifier (Id).</returns>
         public PolygonModel CreatePolygonId(PolygonModel polygonModel)
         {
-            List<PolygonModel> polygons = PolygonFile.FullFilePath().LoadFile().ConvertToPolygonModels(PolygonFile);
+            List<PolygonModel> polygons = PolygonFile.FullFilePath().LoadFile().ConvertToPolygonModels();
 
             int currentId = 1;
 
@@ -124,18 +37,40 @@ namespace FacadeRepairLibrary.DataAccess
             return polygonModel;
         }
 
+        /// <summary>
+        /// Saves new polygon to a correct PolygonFile. If it's just edited polygon that was already in the PolygonFile this method will just substitute old one with the new (edited) one.
+        /// </summary>
+        /// <param name="polygonModel">New or edited polygon.</param>
         public void SavePolygon(PolygonModel polygonModel)
         {
-            List<PolygonModel> polygons = PolygonFile.FullFilePath().LoadFile().ConvertToPolygonModels(PolygonFile);
+            List<PolygonModel> polygons = PolygonFile.FullFilePath().LoadFile().ConvertToPolygonModels();
 
-            polygons.Add(polygonModel);
+            bool oldPolygon = false;
+            for (int i = 0, n = polygons.Count; i < n; i++)
+            {
+                if (polygons[i].Id == polygonModel.Id)
+                {
+                    polygons[i] = polygonModel;
+                    oldPolygon = true;
+                }
+            }
+
+            if (!oldPolygon)
+            {
+                polygons.Add(polygonModel); 
+            }
 
             polygons.SaveToPolygonsFile(PolygonFile);
         }
 
+        /// <summary>
+        /// Searches for polygons in the PolygonFile by polygon.Id.
+        /// </summary>
+        /// <param name="id">Id of the polygon we want to find</param>
+        /// <returns>Requested polygon.</returns>
         public PolygonModel GetPolygonById(int id)
         {
-            List<PolygonModel> polygons = PolygonFile.FullFilePath().LoadFile().ConvertToPolygonModels(PolygonFile);
+            List<PolygonModel> polygons = PolygonFile.FullFilePath().LoadFile().ConvertToPolygonModels();
             PolygonModel chosenPolygon = new PolygonModel();
 
             foreach (PolygonModel polygon in polygons)
@@ -150,10 +85,10 @@ namespace FacadeRepairLibrary.DataAccess
         }
 
         /// <summary>
-        /// 
+        /// Updates Id value in the facade properties.
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="facadeModel">The facade informations.This facade doesn't have the (correct) Id value.</param>
+        /// <returns>The facade informations, including the unique identifier (Id).</returns>
         public FacadeModel CreateFacadeId(FacadeModel facadeModel)
         {
             //Load the text file and Convert the text to List<FacadeModel>
@@ -171,14 +106,40 @@ namespace FacadeRepairLibrary.DataAccess
 
             return facadeModel;
         }
- 
+
+        /// <summary>
+        /// Saves new facade to a correct FacadeFile. If it's just edited facade that was already in the FacadeFile this method will just substitute old one with the new (edited) one.
+        /// </summary>
+        /// <param name="facadeModel">New or edited facade.</param>
         public void SaveFacede(FacadeModel facadeModel)
         {
             List<FacadeModel> facades = FacadeFile.FullFilePath().LoadFile().ConvertToFacadeModels(FacadeFile);
 
-            facades.Add(facadeModel);
+            bool oldFacade = false;
+            for (int i = 0, n = facades.Count; i < n; i++)
+            {
+                if (facades[i].Id == facadeModel.Id)
+                {
+                    facades[i] = facadeModel;
+                    oldFacade = true;
+                }
+            }
+
+            if (!oldFacade)
+            {
+                facades.Add(facadeModel);
+            }
 
             facades.SaveToFacadesFile(FacadeFile);
+        }
+
+        public List<FacadeModel> GetAllFacades()
+        {
+            // Get content of FacadeModels.csv file and make facadeModels out of it
+            List<FacadeModel> facades = FacadeFile.FullFilePath().LoadFile().ConvertToFacadeModels(PolygonFile);
+            
+            // Return List<FacadeModel>
+            return facades;
         }
     }
 }

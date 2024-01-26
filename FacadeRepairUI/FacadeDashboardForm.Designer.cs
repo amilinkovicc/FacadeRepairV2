@@ -33,7 +33,7 @@
             this.createFacadeButton = new System.Windows.Forms.Button();
             this.loadExistingFacadeDropDown = new System.Windows.Forms.ComboBox();
             this.loadExistingFacadeLabel = new System.Windows.Forms.Label();
-            this.addPointButton = new System.Windows.Forms.Button();
+            this.loadFacadeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // headerLabel
@@ -83,20 +83,21 @@
             this.loadExistingFacadeLabel.TabIndex = 16;
             this.loadExistingFacadeLabel.Text = "Load Existing Facade";
             // 
-            // addPointButton
+            // loadFacadeButton
             // 
-            this.addPointButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.addPointButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            this.addPointButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.addPointButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addPointButton.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.addPointButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.addPointButton.Location = new System.Drawing.Point(204, 215);
-            this.addPointButton.Name = "addPointButton";
-            this.addPointButton.Size = new System.Drawing.Size(178, 42);
-            this.addPointButton.TabIndex = 18;
-            this.addPointButton.Text = "Load Facade";
-            this.addPointButton.UseVisualStyleBackColor = true;
+            this.loadFacadeButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.loadFacadeButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.loadFacadeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.loadFacadeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loadFacadeButton.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.loadFacadeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
+            this.loadFacadeButton.Location = new System.Drawing.Point(204, 215);
+            this.loadFacadeButton.Name = "loadFacadeButton";
+            this.loadFacadeButton.Size = new System.Drawing.Size(178, 42);
+            this.loadFacadeButton.TabIndex = 18;
+            this.loadFacadeButton.Text = "Load Facade";
+            this.loadFacadeButton.UseVisualStyleBackColor = true;
+            this.loadFacadeButton.Click += new System.EventHandler(this.addPointButton_Click);
             // 
             // FacadeDashboardForm
             // 
@@ -104,7 +105,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(586, 410);
-            this.Controls.Add(this.addPointButton);
+            this.Controls.Add(this.loadFacadeButton);
             this.Controls.Add(this.loadExistingFacadeDropDown);
             this.Controls.Add(this.loadExistingFacadeLabel);
             this.Controls.Add(this.createFacadeButton);
@@ -125,6 +126,6 @@
         private System.Windows.Forms.Button createFacadeButton;
         private System.Windows.Forms.ComboBox loadExistingFacadeDropDown;
         private System.Windows.Forms.Label loadExistingFacadeLabel;
-        private System.Windows.Forms.Button addPointButton;
+        private System.Windows.Forms.Button loadFacadeButton;
     }
 }

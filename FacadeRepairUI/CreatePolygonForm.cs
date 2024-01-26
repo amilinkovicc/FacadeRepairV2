@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Security.Authentication.ExtendedProtection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,17 +15,27 @@ using FacadeRepairLibrary.Model;
 
 namespace FacadeRepairUI
 {
-    public partial class CreatePolygonForm : Form
+    public partial class CreatePolygonForm : Form, IPolygonViewRequester
     {
-        private List<PointModel> pointsOfPolygon = new List<PointModel>();
-
-        IPolygonRequester callingForm;
+        private readonly IPolygonRequester callingForm;
+        private readonly PolygonModel mainPolygon = new PolygonModel();
 
         public CreatePolygonForm(IPolygonRequester caller)
         {
             InitializeComponent();
 
             callingForm = caller;
+
+            WireUpList();
+        }
+
+        public CreatePolygonForm(IPolygonRequester caller, PolygonModel p)
+        {
+            InitializeComponent();
+
+            callingForm = caller;
+
+            mainPolygon = p;
 
             WireUpList();
         }
@@ -38,7 +49,7 @@ namespace FacadeRepairUI
                 // TODO - DELETE?
                 //p = GlobalConfig.Connection.CreatePoint(p);
 
-                pointsOfPolygon.Add(p);
+                mainPolygon.points.Add(p);
 
                 WireUpList();
 
@@ -71,7 +82,7 @@ namespace FacadeRepairUI
 
             if (p != null)
             {
-                pointsOfPolygon.Remove(p);
+                mainPolygon.points.Remove(p);
 
                 WireUpList();
             }
@@ -81,14 +92,21 @@ namespace FacadeRepairUI
         {
             if (ValidatePolygon())
             {
-                PolygonModel polygon = new PolygonModel();
+                GlobalConfig.Connection.CreatePolygonId(mainPolygon);
+                GlobalConfig.Connection.SavePolygon(mainPolygon);
 
-                polygon.points = pointsOfPolygon;
-
-                GlobalConfig.Connection.CreatePolygonId(polygon);
-                GlobalConfig.Connection.SavePolygon(polygon);
-
-                callingForm.PolygonComplete(polygon);
+                if (callingForm.PolygonName() == "CreateFacadeForm")
+                {
+                    // Connect with FacadeViewerForm
+                    PolygonViewerForm frm = new PolygonViewerForm(this, mainPolygon);
+                    frm.Show();
+                    this.Close();
+                }
+                else if (callingForm.PolygonName() == "FacadeViewerForm")
+                {
+                    callingForm.PolygonComplete(mainPolygon);
+                    this.Close();
+                }
 
                 // TODO - If we aren't closing this form after creation, reset the form.
                 this.Close();
@@ -102,7 +120,7 @@ namespace FacadeRepairUI
         private void WireUpList()
         {
             pointsListBox.DataSource = null;
-            pointsListBox.DataSource = pointsOfPolygon;
+            pointsListBox.DataSource = mainPolygon.points;
             pointsListBox.DisplayMember = "Coordinates";
         }
 
@@ -128,16 +146,15 @@ namespace FacadeRepairUI
         private bool ValidatePoint()
         {
             bool output = true;
-            double x = 0, y = 0;
 
-            if (!(double.TryParse(xValue.Text, out x)))
+            if (!(double.TryParse(xValue.Text, out double x)))
             {
                 // You can just return false in every if and at the end return true.
                 // This way if you add messages that explain what is wrong with the input, user will get all messages at once instead one by one.
                 output = false;
             }
 
-            if (!(double.TryParse(yValue.Text, out y)))
+            if (!(double.TryParse(yValue.Text, out double y)))
             {
                 output = false;
             }
@@ -147,7 +164,7 @@ namespace FacadeRepairUI
                 output = false;
             }
 
-            if (pointsOfPolygon.Count() < 3)
+            if (mainPolygon.points.Count() < 3)
             {
                 output = false;
             }
@@ -174,12 +191,9 @@ namespace FacadeRepairUI
             UpdateSelectedValues();
         }
 
-        public void PolygonComplete(PolygonModel polygonModel)
+        public void PolygonViewComplete(PolygonModel polygonModel)
         {
-            // Get back from a form a PoligonModel
-            // Take the PolygonModel and put it into polygonsListBox
-            //polygonsOfFacade.Add(polygonModel);
-            //WireUpList();
+            throw new NotImplementedException();
         }
     }
 }
