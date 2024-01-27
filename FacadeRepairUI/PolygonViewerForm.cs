@@ -7,16 +7,17 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FacadeRepairUI
 {
-    public partial class PolygonViewerForm : Form, IPolygonRequester
+    public partial class PolygonViewerForm : Form, IPolygonRequester, IBoundingBoxRequester
     {
-        private const int polygonHeight = 850;
-        private const int polygonWidth = 630;
+        private const int pbHeight = 850;
+        private const int pbWidth = 630;
         private readonly List<Point> points = new List<Point>();
         private bool drawPicture = false;
 
@@ -66,8 +67,8 @@ namespace FacadeRepairUI
         public void AddPolygonPoints(List<PointModel> polygonPoints)
         {
             // Calculate relation between image size and PictureBox size and scale coordinates according to it
-            double scaleX = (polygonWidth - 30) / polygonPoints.Max(p => p.x);
-            double scaleY = (polygonHeight - 50) / polygonPoints.Max(p => p.y);
+            double scaleX = (pbWidth - 30) / polygonPoints.Max(p => p.x);
+            double scaleY = (pbHeight - 50) / polygonPoints.Max(p => p.y);
 
             // Load polygon points
             foreach (PointModel p in polygonPoints)
@@ -102,7 +103,32 @@ namespace FacadeRepairUI
 
         public string PolygonName()
         {
-            throw new NotImplementedException();
+            //TODO - Treba nesto da iradisi ili izbrisi
+            //throw new NotImplementedException();
+            return "";
+        }
+
+        public void BoundingBoxComplete(PolygonModel model)
+        {
+            //Get back from a form a PoligonModel
+            // Take the PolygonModel and put it into polygonsListBox
+            mainPolygon = model;
+            drawPicture = true;
+            polygonRepresentationPictureBox.Invalidate();
+            WireUpList();
+        }
+
+        private void boundingBoxButton_Click(object sender, EventArgs e)
+        {
+            // Connect with BoundingBoxForm
+            BoundingBoxForm frm = new BoundingBoxForm(this, mainPolygon);
+            frm.Show();
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            callingForm.PolygonViewComplete(mainPolygon);
+            this.Close();
         }
     }
 }

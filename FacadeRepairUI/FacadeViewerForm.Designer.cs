@@ -46,6 +46,7 @@
             this.polygonsListBox = new System.Windows.Forms.ListBox();
             this.polygonsLabel = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.backButton = new System.Windows.Forms.Button();
             this.objectInfoGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.facadeRepresentationPicturebox)).BeginInit();
             this.SuspendLayout();
@@ -82,7 +83,7 @@
             this.objectInfoGroupBox.Controls.Add(this.objectAddressLabel);
             this.objectInfoGroupBox.Controls.Add(this.objectNameValue);
             this.objectInfoGroupBox.Controls.Add(this.objectNameLabel);
-            this.objectInfoGroupBox.Location = new System.Drawing.Point(666, 119);
+            this.objectInfoGroupBox.Location = new System.Drawing.Point(657, 50);
             this.objectInfoGroupBox.Name = "objectInfoGroupBox";
             this.objectInfoGroupBox.Size = new System.Drawing.Size(551, 296);
             this.objectInfoGroupBox.TabIndex = 2;
@@ -208,7 +209,7 @@
             this.editFacadeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editFacadeButton.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.editFacadeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.editFacadeButton.Location = new System.Drawing.Point(829, 808);
+            this.editFacadeButton.Location = new System.Drawing.Point(820, 739);
             this.editFacadeButton.Name = "editFacadeButton";
             this.editFacadeButton.Size = new System.Drawing.Size(225, 59);
             this.editFacadeButton.TabIndex = 15;
@@ -221,7 +222,7 @@
             this.polygonsListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.polygonsListBox.FormattingEnabled = true;
             this.polygonsListBox.ItemHeight = 30;
-            this.polygonsListBox.Location = new System.Drawing.Point(666, 470);
+            this.polygonsListBox.Location = new System.Drawing.Point(657, 401);
             this.polygonsListBox.Name = "polygonsListBox";
             this.polygonsListBox.Size = new System.Drawing.Size(551, 332);
             this.polygonsListBox.TabIndex = 17;
@@ -231,7 +232,7 @@
             this.polygonsLabel.AutoSize = true;
             this.polygonsLabel.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.polygonsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.polygonsLabel.Location = new System.Drawing.Point(670, 430);
+            this.polygonsLabel.Location = new System.Drawing.Point(661, 361);
             this.polygonsLabel.Name = "polygonsLabel";
             this.polygonsLabel.Size = new System.Drawing.Size(125, 37);
             this.polygonsLabel.TabIndex = 16;
@@ -245,7 +246,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.button1.Location = new System.Drawing.Point(790, 912);
+            this.button1.Location = new System.Drawing.Point(781, 843);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(303, 79);
             this.button1.TabIndex = 18;
@@ -253,12 +254,29 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // backButton
+            // 
+            this.backButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.backButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.backButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backButton.Font = new System.Drawing.Font("Segoe UI Semibold", 18.25F, System.Drawing.FontStyle.Bold);
+            this.backButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
+            this.backButton.Location = new System.Drawing.Point(1067, 949);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(150, 50);
+            this.backButton.TabIndex = 32;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
             // FacadeViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1229, 1011);
+            this.Controls.Add(this.backButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.polygonsListBox);
             this.Controls.Add(this.polygonsLabel);
@@ -300,6 +318,7 @@
         private System.Windows.Forms.ListBox polygonsListBox;
         private System.Windows.Forms.Label polygonsLabel;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button backButton;
     }
 }
 

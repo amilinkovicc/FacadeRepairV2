@@ -23,16 +23,21 @@ namespace FacadeRepairLibrary
         public static void InitializeConnection (DatabaseType db)
         {
             // TODO - Set up connections properly
-            if (db == DatabaseType.Sql) 
+            if (db == DatabaseType.SXML) 
             {
-                // TODO DELETE (Set up the SQL connection properly)
-                //SqlConnector sql = new SqlConnector ();
-                //Connection = sql;
+                // TODO (Set up the SXML connection properly)
+                //SXMLConnector smxl = new SMXLConnector ();
+                //Connection = smxl;
             }
-            else if (db == DatabaseType.TextFile) 
+            else if (db == DatabaseType.CSV) 
             {
                 TextConnector text = new TextConnector();
                 Connection = text;
+            }
+            else if (db == DatabaseType.XLSX)
+            {
+                //XLSXConnector xlsx = new XLSXConnector();
+                //Connection = xlsx;
             }
         }
     }

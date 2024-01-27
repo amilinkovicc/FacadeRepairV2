@@ -8,8 +8,9 @@ namespace FacadeRepairLibrary
 {
     public enum DatabaseType
     {
-        Sql,
-        TextFile
+        SXML, 
+        XLSX,
+        CSV
     }
     public enum DamageType
     {

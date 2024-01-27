@@ -19,7 +19,7 @@ namespace FacadeRepairUI
             Application.SetCompatibleTextRenderingDefault(false);
 
             //Initialize the database connection
-            FacadeRepairLibrary.GlobalConfig.InitializeConnection(DatabaseType.TextFile);
+            FacadeRepairLibrary.GlobalConfig.InitializeConnection(DatabaseType.CSV);
             Application.Run(new FacadeDashboardForm());
 
             //Application.Run(new PolygonViewerForm());

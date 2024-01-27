@@ -36,6 +36,8 @@
             this.deletePointButton = new System.Windows.Forms.Button();
             this.createPolygonButton = new System.Windows.Forms.Button();
             this.addPointGroupBox = new System.Windows.Forms.GroupBox();
+            this.incorrectYValue = new System.Windows.Forms.Label();
+            this.incorrectXValue = new System.Windows.Forms.Label();
             this.addPointButton = new System.Windows.Forms.Button();
             this.yValue = new System.Windows.Forms.TextBox();
             this.xValue = new System.Windows.Forms.TextBox();
@@ -128,6 +130,8 @@
             // 
             // addPointGroupBox
             // 
+            this.addPointGroupBox.Controls.Add(this.incorrectYValue);
+            this.addPointGroupBox.Controls.Add(this.incorrectXValue);
             this.addPointGroupBox.Controls.Add(this.addPointButton);
             this.addPointGroupBox.Controls.Add(this.yValue);
             this.addPointGroupBox.Controls.Add(this.editPointButton);
@@ -142,6 +146,28 @@
             this.addPointGroupBox.TabIndex = 28;
             this.addPointGroupBox.TabStop = false;
             this.addPointGroupBox.Text = "Add Point";
+            // 
+            // incorrectYValue
+            // 
+            this.incorrectYValue.AutoSize = true;
+            this.incorrectYValue.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.incorrectYValue.ForeColor = System.Drawing.Color.Red;
+            this.incorrectYValue.Location = new System.Drawing.Point(143, 148);
+            this.incorrectYValue.Name = "incorrectYValue";
+            this.incorrectYValue.Size = new System.Drawing.Size(82, 13);
+            this.incorrectYValue.TabIndex = 30;
+            this.incorrectYValue.Text = "Incorrect value";
+            // 
+            // incorrectXValue
+            // 
+            this.incorrectXValue.AutoSize = true;
+            this.incorrectXValue.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.incorrectXValue.ForeColor = System.Drawing.Color.Red;
+            this.incorrectXValue.Location = new System.Drawing.Point(143, 89);
+            this.incorrectXValue.Name = "incorrectXValue";
+            this.incorrectXValue.Size = new System.Drawing.Size(82, 13);
+            this.incorrectXValue.TabIndex = 29;
+            this.incorrectXValue.Text = "Incorrect value";
             // 
             // addPointButton
             // 
@@ -212,6 +238,7 @@
             this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.Name = "CreatePolygonForm";
             this.Text = "Create Polygon";
+            this.Load += new System.EventHandler(this.CreatePolygonForm_Load);
             this.addPointGroupBox.ResumeLayout(false);
             this.addPointGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -233,5 +260,7 @@
         private System.Windows.Forms.TextBox xValue;
         private System.Windows.Forms.Label xLabel;
         private System.Windows.Forms.Label yLabel;
+        private System.Windows.Forms.Label incorrectXValue;
+        private System.Windows.Forms.Label incorrectYValue;
     }
 }

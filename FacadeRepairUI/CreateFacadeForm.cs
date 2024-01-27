@@ -13,7 +13,7 @@ using System.Reflection;
 
 namespace FacadeRepairUI
 {
-    public partial class CreateFacadeForm : Form, IFacadeViewRequester, IPolygonRequester, IPolygonViewRequester
+    public partial class CreateFacadeForm : Form, IPolygonRequester, IPolygonViewRequester
     {
         private readonly IFacadeRequester callingForm;
         private readonly FacadeModel mainFacade = new FacadeModel();
@@ -43,6 +43,7 @@ namespace FacadeRepairUI
 
         private void addPolygonButton_Click(object sender, EventArgs e)
         {
+            // TODO - add polygon to polygonlistbox
             DamageType.TryParse(typeOfDamageDropDown.Text, out DamageType damage);
 
             if (damage == DamageType.Partially)
@@ -81,6 +82,7 @@ namespace FacadeRepairUI
         {
             if (ValidateFacade())
             {
+                // TODO - If for create button if facade is full or partually damaged
                 mainFacade.objectName = objectNameValue.Text;
                 mainFacade.objectAddress = objectAddressValue.Text;
                 mainFacade.objectOwner = objectOwnerValue.Text;
@@ -98,22 +100,8 @@ namespace FacadeRepairUI
                 GlobalConfig.Connection.CreateFacadeId(mainFacade);
                 GlobalConfig.Connection.SaveFacede(mainFacade);
 
-                if (callingForm.FacadeName() == "FacadeDashboardForm")
-                {
-                    // Connect with FacadeViewerForm
-                    FacadeViewerForm frm = new FacadeViewerForm(this, mainFacade);
-                    frm.Show();
-                    this.Close();
-                }
-                else if (callingForm.FacadeName() == "FacadeViewerForm")
-                {
-                    callingForm.FacadeComplete(mainFacade);
-                    this.Close();
-                }
-            }
-            else
-            {
-                MessageBox.Show("This form has invalid information. Please check it and try again.");
+                callingForm.FacadeComplete(mainFacade);
+                this.Close();
             }
         }
 
@@ -131,45 +119,78 @@ namespace FacadeRepairUI
             if (objectNameValue.Text.Length == 0)
             {
                 output = false;
+                incorrectObjectNameValue.ForeColor = Color.Red;
+            }
+            else
+            {
+                incorrectObjectNameValue.ForeColor = Color.White;
             }
 
             if (objectAddressValue.Text.Length == 0)
             {
                 output = false;
+                incorrectObjectAddressValue.ForeColor = Color.Red;
+            }
+            else
+            {
+                incorrectObjectAddressValue.ForeColor = Color.White;
             }
 
             if (objectOwnerValue.Text.Length == 0)
             {
                 output = false;
+                incorrectObjectOwnerValue.ForeColor = Color.Red;
             }
+            else
+            {
+                incorrectObjectOwnerValue.ForeColor= Color.White;
+            }
+
 
             if (!(int.TryParse(objectHeightValue.Text, out int height)))
             {
                 output = false;
+                incorrectHeightValue.ForeColor = Color.Red;
+            }
+            else if (height < 0)
+            {
+                output = false;
+                incorrectHeightValue.ForeColor = Color.Red;
+            }
+            else
+            {
+                incorrectHeightValue.ForeColor = Color.White;
             }
 
             if (!(int.TryParse(objectWidthValue.Text, out int width)))
             {
                 output = false;
+                incorrectWidthValue.ForeColor = Color.Red;
             }
-
-            if (height <= 0 || width <= 0)
+            else if (width < 0)
             {
                 output = false;
+                incorrectWidthValue.ForeColor = Color.Red;
+            }
+            else
+            {
+                incorrectWidthValue.ForeColor = Color.White;
             }
 
-            if (!Enum.TryParse(typeOfDamageDropDown.Text, true, out DamageType _))
+            DamageType damageType;
+            if (!Enum.TryParse(typeOfDamageDropDown.Text, true, out damageType))
             {
                 output = false;
+                MessageBox.Show("Error! Incorrect Type of Damage value!");
+            }
+
+            if(Convert.ToInt16(damageType) == 1 && polygonsListBox.Items.Count < 1)
+            {
+                output = false;
+                MessageBox.Show("Error! You need at least one polygon to construct facade that is partially damaged!");
             }
 
             return output;
-        }
-
-        public void FacadeViewComplete(FacadeModel facadeModel)
-        {
-            //Nothing to do here.
-            // TODO - Maybe invent some better algorithm?
         }
 
         public void PolygonComplete(PolygonModel polygonModel)
@@ -198,6 +219,15 @@ namespace FacadeRepairUI
         public string PolygonName()
         {
             return this.Name;
+        }
+
+        private void CreateFacadeForm_Load(object sender, EventArgs e)
+        {
+            incorrectObjectNameValue.ForeColor = Color.White;
+            incorrectObjectAddressValue.ForeColor = Color.White;
+            incorrectObjectOwnerValue.ForeColor = Color.White;
+            incorrectHeightValue.ForeColor = Color.White;
+            incorrectWidthValue.ForeColor = Color.White;
         }
     }
 }

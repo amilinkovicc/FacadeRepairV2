@@ -62,26 +62,7 @@ namespace FacadeRepairUI
 
         private void button1_Click(object sender, EventArgs e) //Calculate Price
         {
-            double price = 0;
-
-            if (mainFacade.damageType == DamageType.Full)
-            {
-                price += mainFacade.objectWidth * mainFacade.objectHeight * 399.9;
-            }
-            else
-            {
-                for (int i = 0, m = mainFacade.polygons.Count; i < m; i++)
-                {
-                    if (mainFacade.polygons[i].surfaceArea < 3.33)
-                    {
-                        price += mainFacade.polygons[i].surfaceArea * 399.9 + mainFacade.polygons[i].perimeter * 129.99;
-                    }
-                    else
-                    {
-                        price += mainFacade.polygons[i].surfaceArea * 399.9 + mainFacade.polygons[i].perimeter * 550;
-                    }
-                }
-            }
+            MessageBox.Show($"Repair price is {mainFacade.price}.");
         }
 
         private void editFacadeButton_Click(object sender, EventArgs e)
@@ -140,6 +121,12 @@ namespace FacadeRepairUI
         public string FacadeName()
         {
             return this.Name;
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            callingForm.FacadeViewComplete(mainFacade);
+            this.Close();
         }
     }
 }

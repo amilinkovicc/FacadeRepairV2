@@ -74,3 +74,4 @@ C:\Aleksa\Fakultet\OOP\Projekat\FacadeRepairV2\FacadeRepairUI\bin\Debug\System.C
 C:\Aleksa\Fakultet\OOP\Projekat\FacadeRepairV2\FacadeRepairUI\bin\Debug\FacadeRepairLibrary.pdb
 C:\Aleksa\Fakultet\OOP\Projekat\FacadeRepairV2\FacadeRepairUI\bin\Debug\System.Configuration.ConfigurationManager.xml
 C:\Aleksa\Fakultet\OOP\Projekat\FacadeRepairV2\FacadeRepairUI\obj\Debug\FacadeRepairUI.csproj.CopyComplete
+C:\Aleksa\Fakultet\OOP\Projekat\FacadeRepairV2\FacadeRepairUI\obj\Debug\FacadeRepairUI.BoundingBoxForm.resources

@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoundingBoxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BoundingBoxForm.Designer.cs">
+      <DependentUpon>BoundingBoxForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CreateFacadeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,7 @@
     <Compile Include="FacadeViewerForm.Designer.cs">
       <DependentUpon>FacadeViewerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IBoundingBoxRequester.cs" />
     <Compile Include="IFacadeRequester.cs" />
     <Compile Include="IFacadeViewRequester.cs" />
     <Compile Include="IPolygonRequester.cs" />
@@ -86,6 +93,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BoundingBoxForm.resx">
+      <DependentUpon>BoundingBoxForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CreateFacadeForm.resx">
       <DependentUpon>CreateFacadeForm.cs</DependentUpon>
     </EmbeddedResource>

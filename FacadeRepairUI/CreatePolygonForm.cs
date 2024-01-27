@@ -15,7 +15,7 @@ using FacadeRepairLibrary.Model;
 
 namespace FacadeRepairUI
 {
-    public partial class CreatePolygonForm : Form, IPolygonViewRequester
+    public partial class CreatePolygonForm : Form
     {
         private readonly IPolygonRequester callingForm;
         private readonly PolygonModel mainPolygon = new PolygonModel();
@@ -46,19 +46,12 @@ namespace FacadeRepairUI
             {
                 PointModel p = new PointModel(xValue.Text, yValue.Text);
 
-                // TODO - DELETE?
-                //p = GlobalConfig.Connection.CreatePoint(p);
-
                 mainPolygon.points.Add(p);
 
                 WireUpList();
 
                 xValue.Text = "";
                 yValue.Text = "";
-            }
-            else
-            {
-                MessageBox.Show("This form has invalid information. Please check it and try again.");
             }
         }
 
@@ -95,28 +88,11 @@ namespace FacadeRepairUI
                 GlobalConfig.Connection.CreatePolygonId(mainPolygon);
                 GlobalConfig.Connection.SavePolygon(mainPolygon);
 
-                if (callingForm.PolygonName() == "CreateFacadeForm")
-                {
-                    // Connect with FacadeViewerForm
-                    PolygonViewerForm frm = new PolygonViewerForm(this, mainPolygon);
-                    frm.Show();
-                    this.Close();
-                }
-                else if (callingForm.PolygonName() == "FacadeViewerForm")
-                {
-                    callingForm.PolygonComplete(mainPolygon);
-                    this.Close();
-                }
-
-                // TODO - If we aren't closing this form after creation, reset the form.
+                callingForm.PolygonComplete(mainPolygon);
                 this.Close();
             }
-            else
-            {
-                MessageBox.Show("This form has invalid information. Please check it and try again.");
-            }
         }
-               
+
         private void WireUpList()
         {
             pointsListBox.DataSource = null;
@@ -138,7 +114,6 @@ namespace FacadeRepairUI
 
         }
 
-
         /// <summary>
         /// Checks if the coordinates of the point are valid.
         /// </summary>
@@ -149,25 +124,34 @@ namespace FacadeRepairUI
 
             if (!(double.TryParse(xValue.Text, out double x)))
             {
-                // You can just return false in every if and at the end return true.
-                // This way if you add messages that explain what is wrong with the input, user will get all messages at once instead one by one.
                 output = false;
+                incorrectXValue.ForeColor = Color.Red;
+            }
+            else if (x < 0)
+            {
+                output = false;
+                incorrectXValue.ForeColor = Color.Red;
+            }
+            else
+            {
+                incorrectXValue.ForeColor = Color.White;
             }
 
             if (!(double.TryParse(yValue.Text, out double y)))
             {
                 output = false;
+                incorrectYValue.ForeColor = Color.Red;
             }
-
-            if (x < 0 || y < 0)
+            else if (y < 0)
             {
                 output = false;
+                incorrectYValue.ForeColor = Color.Red;
+            }
+            else
+            {
+                incorrectYValue.ForeColor = Color.White;
             }
 
-            if (mainPolygon.points.Count() < 3)
-            {
-                output = false;
-            }
             // TODO - It shouldn't be possible to add point out of facade.
             //if (x > width || y > height)
             //{
@@ -177,9 +161,22 @@ namespace FacadeRepairUI
             return output;
         }
 
-        private bool ValidatePolygon() 
+        private bool ValidatePolygon()
         {
             bool output = true;
+
+            if (mainPolygon.points.Count() < 3 || mainPolygon.points.Count() > 250)
+            {
+                output = false;
+                MessageBox.Show("Error. You need at least 3 points, but less than 250 points, to make polygon!");
+            }
+            //float delta = A1 * B2 - A2 * B1;
+
+            //if (delta == 0)
+            //    throw new ArgumentException("Lines are parallel");
+
+            //float x = (B2 * C1 - B1 * C2) / delta;
+            //float y = (A1 * C2 - A2 * C1) / delta;
 
             // TODO - Is polygon possible to constract
 
@@ -191,9 +188,10 @@ namespace FacadeRepairUI
             UpdateSelectedValues();
         }
 
-        public void PolygonViewComplete(PolygonModel polygonModel)
+        private void CreatePolygonForm_Load(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            incorrectXValue.ForeColor = Color.White;
+            incorrectYValue.ForeColor = Color.White;
         }
     }
 }

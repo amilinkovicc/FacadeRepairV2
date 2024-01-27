@@ -51,7 +51,6 @@ namespace FacadeRepairLibrary.Model
         /// </summary>
         public double price
         {
-            // TODO - Add price from FacadeViewerForm
             get { return Price(damageType, polygons); }
             set { }
         }
@@ -63,12 +62,33 @@ namespace FacadeRepairLibrary.Model
 
         public string NameOfFacade
         {
-            get { return $"Facade {Id}, {objectName}"; } // TODO - Come up with better names for polygons
+            get { return $"{objectName}, Facade {Id}"; } // TODO - Come up with better names for polygons
         }
 
         private double Price(DamageType damageType, List<PolygonModel> polygons)
         {
+            double price = 0;
 
+            if (damageType == DamageType.Full)
+            {
+                price += objectWidth * objectHeight * 399.9;
+            }
+            else
+            {
+                for (int i = 0, m = polygons.Count; i < m; i++)
+                {
+                    if (polygons[i].surfaceArea < 3.33)
+                    {
+                        price += polygons[i].surfaceArea * 399.9 + polygons[i].perimeter * 129.99;
+                    }
+                    else
+                    {
+                        price += polygons[i].surfaceArea * 399.9 + polygons[i].perimeter * 550;
+                    }
+                }
+            }
+
+            return price;
         }
     }
 }

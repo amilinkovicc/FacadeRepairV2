@@ -49,6 +49,11 @@
             this.objectHeightValue = new System.Windows.Forms.TextBox();
             this.heightLabel = new System.Windows.Forms.Label();
             this.widthLabel = new System.Windows.Forms.Label();
+            this.incorrectObjectNameValue = new System.Windows.Forms.Label();
+            this.incorrectObjectAddressValue = new System.Windows.Forms.Label();
+            this.incorrectObjectOwnerValue = new System.Windows.Forms.Label();
+            this.incorrectHeightValue = new System.Windows.Forms.Label();
+            this.incorrectWidthValue = new System.Windows.Forms.Label();
             this.dimensionsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -122,7 +127,7 @@
             this.typeOfDamageLabel.AutoSize = true;
             this.typeOfDamageLabel.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.typeOfDamageLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.typeOfDamageLabel.Location = new System.Drawing.Point(12, 495);
+            this.typeOfDamageLabel.Location = new System.Drawing.Point(12, 505);
             this.typeOfDamageLabel.Name = "typeOfDamageLabel";
             this.typeOfDamageLabel.Size = new System.Drawing.Size(215, 37);
             this.typeOfDamageLabel.TabIndex = 8;
@@ -135,7 +140,7 @@
             this.typeOfDamageDropDown.Items.AddRange(new object[] {
             "Full",
             "Partially"});
-            this.typeOfDamageDropDown.Location = new System.Drawing.Point(244, 496);
+            this.typeOfDamageDropDown.Location = new System.Drawing.Point(244, 504);
             this.typeOfDamageDropDown.Name = "typeOfDamageDropDown";
             this.typeOfDamageDropDown.Size = new System.Drawing.Size(181, 38);
             this.typeOfDamageDropDown.TabIndex = 9;
@@ -220,15 +225,17 @@
             // 
             // dimensionsGroupBox
             // 
+            this.dimensionsGroupBox.Controls.Add(this.incorrectWidthValue);
+            this.dimensionsGroupBox.Controls.Add(this.incorrectHeightValue);
             this.dimensionsGroupBox.Controls.Add(this.objectWidthValue);
             this.dimensionsGroupBox.Controls.Add(this.objectHeightValue);
             this.dimensionsGroupBox.Controls.Add(this.heightLabel);
             this.dimensionsGroupBox.Controls.Add(this.widthLabel);
             this.dimensionsGroupBox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.dimensionsGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.dimensionsGroupBox.Location = new System.Drawing.Point(21, 340);
+            this.dimensionsGroupBox.Location = new System.Drawing.Point(21, 350);
             this.dimensionsGroupBox.Name = "dimensionsGroupBox";
-            this.dimensionsGroupBox.Size = new System.Drawing.Size(304, 147);
+            this.dimensionsGroupBox.Size = new System.Drawing.Size(304, 152);
             this.dimensionsGroupBox.TabIndex = 16;
             this.dimensionsGroupBox.TabStop = false;
             this.dimensionsGroupBox.Text = "Dimensions";
@@ -269,12 +276,70 @@
             this.widthLabel.TabIndex = 25;
             this.widthLabel.Text = "Width:";
             // 
+            // incorrectObjectNameValue
+            // 
+            this.incorrectObjectNameValue.AutoSize = true;
+            this.incorrectObjectNameValue.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.incorrectObjectNameValue.ForeColor = System.Drawing.Color.Red;
+            this.incorrectObjectNameValue.Location = new System.Drawing.Point(343, 157);
+            this.incorrectObjectNameValue.Name = "incorrectObjectNameValue";
+            this.incorrectObjectNameValue.Size = new System.Drawing.Size(82, 13);
+            this.incorrectObjectNameValue.TabIndex = 30;
+            this.incorrectObjectNameValue.Text = "Incorrect value";
+            // 
+            // incorrectObjectAddressValue
+            // 
+            this.incorrectObjectAddressValue.AutoSize = true;
+            this.incorrectObjectAddressValue.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.incorrectObjectAddressValue.ForeColor = System.Drawing.Color.Red;
+            this.incorrectObjectAddressValue.Location = new System.Drawing.Point(343, 245);
+            this.incorrectObjectAddressValue.Name = "incorrectObjectAddressValue";
+            this.incorrectObjectAddressValue.Size = new System.Drawing.Size(82, 13);
+            this.incorrectObjectAddressValue.TabIndex = 31;
+            this.incorrectObjectAddressValue.Text = "Incorrect value";
+            // 
+            // incorrectObjectOwnerValue
+            // 
+            this.incorrectObjectOwnerValue.AutoSize = true;
+            this.incorrectObjectOwnerValue.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.incorrectObjectOwnerValue.ForeColor = System.Drawing.Color.Red;
+            this.incorrectObjectOwnerValue.Location = new System.Drawing.Point(343, 333);
+            this.incorrectObjectOwnerValue.Name = "incorrectObjectOwnerValue";
+            this.incorrectObjectOwnerValue.Size = new System.Drawing.Size(82, 13);
+            this.incorrectObjectOwnerValue.TabIndex = 32;
+            this.incorrectObjectOwnerValue.Text = "Incorrect value";
+            // 
+            // incorrectHeightValue
+            // 
+            this.incorrectHeightValue.AutoSize = true;
+            this.incorrectHeightValue.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.incorrectHeightValue.ForeColor = System.Drawing.Color.Red;
+            this.incorrectHeightValue.Location = new System.Drawing.Point(213, 81);
+            this.incorrectHeightValue.Name = "incorrectHeightValue";
+            this.incorrectHeightValue.Size = new System.Drawing.Size(82, 13);
+            this.incorrectHeightValue.TabIndex = 33;
+            this.incorrectHeightValue.Text = "Incorrect value";
+            // 
+            // incorrectWidthValue
+            // 
+            this.incorrectWidthValue.AutoSize = true;
+            this.incorrectWidthValue.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.incorrectWidthValue.ForeColor = System.Drawing.Color.Red;
+            this.incorrectWidthValue.Location = new System.Drawing.Point(213, 134);
+            this.incorrectWidthValue.Name = "incorrectWidthValue";
+            this.incorrectWidthValue.Size = new System.Drawing.Size(82, 13);
+            this.incorrectWidthValue.TabIndex = 33;
+            this.incorrectWidthValue.Text = "Incorrect value";
+            // 
             // CreateFacadeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1007, 552);
+            this.ClientSize = new System.Drawing.Size(1007, 554);
+            this.Controls.Add(this.incorrectObjectOwnerValue);
+            this.Controls.Add(this.incorrectObjectAddressValue);
+            this.Controls.Add(this.incorrectObjectNameValue);
             this.Controls.Add(this.dimensionsGroupBox);
             this.Controls.Add(this.loadPolygonButton);
             this.Controls.Add(this.createFacadeButton);
@@ -297,6 +362,7 @@
             this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.Name = "CreateFacadeForm";
             this.Text = "Create Facade";
+            this.Load += new System.EventHandler(this.CreateFacadeForm_Load);
             this.dimensionsGroupBox.ResumeLayout(false);
             this.dimensionsGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -326,5 +392,10 @@
         private System.Windows.Forms.TextBox objectHeightValue;
         private System.Windows.Forms.Label heightLabel;
         private System.Windows.Forms.Label widthLabel;
+        private System.Windows.Forms.Label incorrectObjectNameValue;
+        private System.Windows.Forms.Label incorrectWidthValue;
+        private System.Windows.Forms.Label incorrectHeightValue;
+        private System.Windows.Forms.Label incorrectObjectAddressValue;
+        private System.Windows.Forms.Label incorrectObjectOwnerValue;
     }
 }

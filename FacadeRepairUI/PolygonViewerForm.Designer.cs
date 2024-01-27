@@ -44,6 +44,7 @@
             this.pointsLabel = new System.Windows.Forms.Label();
             this.editPolygonButton = new System.Windows.Forms.Button();
             this.boundingBoxButton = new System.Windows.Forms.Button();
+            this.backButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.polygonRepresentationPictureBox)).BeginInit();
             this.polygonInfoGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -203,7 +204,7 @@
             this.editPolygonButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editPolygonButton.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.editPolygonButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.editPolygonButton.Location = new System.Drawing.Point(820, 694);
+            this.editPolygonButton.Location = new System.Drawing.Point(820, 677);
             this.editPolygonButton.Name = "editPolygonButton";
             this.editPolygonButton.Size = new System.Drawing.Size(225, 59);
             this.editPolygonButton.TabIndex = 29;
@@ -219,12 +220,29 @@
             this.boundingBoxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.boundingBoxButton.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.boundingBoxButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.boundingBoxButton.Location = new System.Drawing.Point(820, 826);
+            this.boundingBoxButton.Location = new System.Drawing.Point(820, 807);
             this.boundingBoxButton.Name = "boundingBoxButton";
             this.boundingBoxButton.Size = new System.Drawing.Size(225, 59);
             this.boundingBoxButton.TabIndex = 30;
             this.boundingBoxButton.Text = "BoundingBox";
             this.boundingBoxButton.UseVisualStyleBackColor = true;
+            this.boundingBoxButton.Click += new System.EventHandler(this.boundingBoxButton_Click);
+            // 
+            // backButton
+            // 
+            this.backButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.backButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
+            this.backButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backButton.Font = new System.Drawing.Font("Segoe UI Semibold", 18.25F, System.Drawing.FontStyle.Bold);
+            this.backButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
+            this.backButton.Location = new System.Drawing.Point(1022, 919);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(150, 50);
+            this.backButton.TabIndex = 32;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // PolygonViewerForm
             // 
@@ -232,6 +250,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1184, 981);
+            this.Controls.Add(this.backButton);
             this.Controls.Add(this.boundingBoxButton);
             this.Controls.Add(this.editPolygonButton);
             this.Controls.Add(this.pointsListBox);
@@ -271,5 +290,6 @@
         private System.Windows.Forms.Label pointsLabel;
         private System.Windows.Forms.Button editPolygonButton;
         private System.Windows.Forms.Button boundingBoxButton;
+        private System.Windows.Forms.Button backButton;
     }
 }
