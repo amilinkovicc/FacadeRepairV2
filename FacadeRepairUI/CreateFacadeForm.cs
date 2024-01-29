@@ -34,6 +34,7 @@ namespace FacadeRepairUI
             callingForm = caller;
 
             mainFacade = f;
+            UpdateValues(mainFacade);
 
             WireUpList();
         }
@@ -90,13 +91,6 @@ namespace FacadeRepairUI
                 mainFacade.objectHeight = double.Parse(objectHeightValue.Text);
                 mainFacade.damageType = (DamageType)Enum.Parse(typeof(DamageType), typeOfDamageDropDown.Text, true);
 
-                //DamageType.TryParse(typeOfDamageDropDown.Text, out DamageType damage);
-                
-                //if (damage == DamageType.Partially)
-                //{
-                //    facade.polygons = mainFacade.polygons; 
-                //}
-
                 GlobalConfig.Connection.CreateFacadeId(mainFacade);
                 GlobalConfig.Connection.SaveFacede(mainFacade);
 
@@ -110,6 +104,19 @@ namespace FacadeRepairUI
             polygonsListBox.DataSource = null;
             polygonsListBox.DataSource = mainFacade.polygons;
             polygonsListBox.DisplayMember = "NameOfPolygon";
+        }
+
+        private void UpdateValues(FacadeModel facadeModel)
+        {
+            if (facadeModel != null)
+            {
+                objectNameValue.Text = facadeModel.objectName;
+                objectAddressValue.Text = facadeModel.objectAddress;
+                objectOwnerValue.Text = facadeModel.objectOwner;
+                objectWidthValue.Text = Convert.ToString(facadeModel.objectWidth);
+                objectHeightValue.Text = Convert.ToString(facadeModel.objectHeight);
+                typeOfDamageDropDown.Text = Convert.ToString(facadeModel.damageType);
+            }
         }
 
         private bool ValidateFacade ()
@@ -228,6 +235,7 @@ namespace FacadeRepairUI
             incorrectObjectOwnerValue.ForeColor = Color.White;
             incorrectHeightValue.ForeColor = Color.White;
             incorrectWidthValue.ForeColor = Color.White;
+
         }
     }
 }

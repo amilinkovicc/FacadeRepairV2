@@ -55,7 +55,7 @@ namespace FacadeRepairUI
                 if (callingForm != null)
                 {
                     drawPicture = true;
-                    facadeRepresentationPicturebox.Invalidate();
+                    facadeRepresentationPicturebox.Refresh();
                 }
             }
         }
@@ -70,6 +70,7 @@ namespace FacadeRepairUI
             // Connect with CreateFacadeForm
             CreateFacadeForm frm = new CreateFacadeForm(this, mainFacade);
             frm.Show();
+            this.Close();
         }
 
         // TODO - Finish code
@@ -98,7 +99,7 @@ namespace FacadeRepairUI
             graphic.Clear(Color.White);
 
             // Draw the polygon using the Graphics object
-            if (drawPicture) // True if user came back from CreatePolygonForm
+            if (drawPicture && polygonPoints.Count > 0)
             {
                 foreach (var polygons in facadePolygons)
                 {
@@ -113,8 +114,8 @@ namespace FacadeRepairUI
             //Get back from a form a FacadeModel
             // Take the FacadeModel and put it into facadesListBox
             mainFacade = model;
-            drawPicture = true;
-            facadeRepresentationPicturebox.Invalidate();
+            //drawPicture = true;
+            //facadeRepresentationPicturebox.Invalidate();
             WireUpList();
         }
 
@@ -127,6 +128,11 @@ namespace FacadeRepairUI
         {
             callingForm.FacadeViewComplete(mainFacade);
             this.Close();
+        }
+
+        private void FacadeViewerForm_Load(object sender, EventArgs e)
+        {
+            //WireUpList();
         }
     }
 }

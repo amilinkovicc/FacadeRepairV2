@@ -92,7 +92,7 @@ namespace FacadeRepairLibrary.DataAccess
         public FacadeModel CreateFacadeId(FacadeModel facadeModel)
         {
             //Load the text file and Convert the text to List<FacadeModel>
-            List<FacadeModel> facades = FacadeFile.FullFilePath().LoadFile().ConvertToFacadeModels(FacadeFile);
+            List<FacadeModel> facades = FacadeFile.FullFilePath().LoadFile().ConvertToFacadeModels(FacadeFile, PolygonFile);
 
             //Find the max ID
             int currentId = 1;
@@ -113,7 +113,7 @@ namespace FacadeRepairLibrary.DataAccess
         /// <param name="facadeModel">New or edited facade.</param>
         public void SaveFacede(FacadeModel facadeModel)
         {
-            List<FacadeModel> facades = FacadeFile.FullFilePath().LoadFile().ConvertToFacadeModels(FacadeFile);
+            List<FacadeModel> facades = FacadeFile.FullFilePath().LoadFile().ConvertToFacadeModels(FacadeFile, PolygonFile);
 
             bool oldFacade = false;
             for (int i = 0, n = facades.Count; i < n; i++)
@@ -136,7 +136,7 @@ namespace FacadeRepairLibrary.DataAccess
         public List<FacadeModel> GetAllFacades()
         {
             // Get content of FacadeModels.csv file and make facadeModels out of it
-            List<FacadeModel> facades = FacadeFile.FullFilePath().LoadFile().ConvertToFacadeModels(PolygonFile);
+            List<FacadeModel> facades = FacadeFile.FullFilePath().LoadFile().ConvertToFacadeModels(PolygonFile, PolygonFile);
             
             // Return List<FacadeModel>
             return facades;

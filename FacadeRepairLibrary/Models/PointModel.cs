@@ -11,7 +11,6 @@ namespace FacadeRepairLibrary.Model
     /// </summary>
     public class PointModel
     {
-        // TODO - DELETE?
         /// <summary>
         /// The unique identifier for the point.
         /// </summary>

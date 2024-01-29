@@ -57,13 +57,16 @@ namespace FacadeRepairUI
 
         private void editPointButton_Click(object sender, EventArgs e)
         {
-            PointModel p = (PointModel)pointsListBox.SelectedItem;
-
-            if (p != null)
+            if ((PointModel)pointsListBox.SelectedItem != null)
             {
-                p.x = double.Parse(xValue.Text);
-                p.y = double.Parse(yValue.Text);
-
+                foreach (var point in mainPolygon.points)
+                {
+                    if(pointsListBox.SelectedItem.Equals(point))
+                    {
+                        point.x = double.Parse(xValue.Text);
+                        point.y = double.Parse(yValue.Text);
+                    }
+                }
 
                 WireUpList();
             }

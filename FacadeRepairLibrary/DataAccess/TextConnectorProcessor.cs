@@ -53,12 +53,15 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
                 };
                 string temp = cols[4]; // TODO - Finish conversion. List of points seperated with '|'
 
-                //temp = "|(8,9)|(2,9)|(2,3)|(8,3)"
+                //temp = "|(8 9)|(2 9)|(2 3)|(8 3)"
                 string[] polygonPoints = temp.Split('|');
                 for (int i = 1, n = polygonPoints.Count(); i < n; i++) //* i starts from 1 because polygonPoints[0] = ""
                 {
                     //(8 9)
-                    p.points.Add(new PointModel(Convert.ToString(polygonPoints[i][1]), Convert.ToString(polygonPoints[i][3])));
+                    string t = polygonPoints[i];
+                    string[] q = t.Split(' '); // (8 and 9)
+
+                    p.points.Add(new PointModel(q[0].Remove(0, 1), q[1].Remove(q[1].Length - 1, 1)));
                 }
 
                 output.Add(p);
@@ -67,7 +70,7 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
             return output;
         }
 
-        public static List<FacadeModel> ConvertToFacadeModels(this List<string> lines, string polygonFileName)
+        public static List<FacadeModel> ConvertToFacadeModels(this List<string> lines,string facadeFileName,  string polygonFileName)
         {
             List<FacadeModel> output = new List<FacadeModel>();
             List<PolygonModel> polygons = polygonFileName.FullFilePath().LoadFile().ConvertToPolygonModels();

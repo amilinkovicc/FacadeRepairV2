@@ -291,6 +291,7 @@
             this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.Name = "FacadeViewerForm";
             this.Text = "Facade Viewer";
+            this.Load += new System.EventHandler(this.FacadeViewerForm_Load);
             this.objectInfoGroupBox.ResumeLayout(false);
             this.objectInfoGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.facadeRepresentationPicturebox)).EndInit();

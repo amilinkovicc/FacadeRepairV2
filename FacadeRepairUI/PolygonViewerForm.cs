@@ -62,6 +62,7 @@ namespace FacadeRepairUI
             // Connect with CreatePolygonForm
             CreatePolygonForm frm = new CreatePolygonForm(this, mainPolygon);
             frm.Show();
+            this.Close();
         }
 
         public void AddPolygonPoints(List<PointModel> polygonPoints)
