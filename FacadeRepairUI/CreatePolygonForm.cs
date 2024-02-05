@@ -124,8 +124,9 @@ namespace FacadeRepairUI
         private bool ValidatePoint()
         {
             bool output = true;
+            double x = -1, y = -1;
 
-            if (!(double.TryParse(xValue.Text, out double x)))
+            if (!(double.TryParse(xValue.Text, out x)))
             {
                 output = false;
                 incorrectXValue.ForeColor = Color.Red;
@@ -140,7 +141,7 @@ namespace FacadeRepairUI
                 incorrectXValue.ForeColor = Color.White;
             }
 
-            if (!(double.TryParse(yValue.Text, out double y)))
+            if (!(double.TryParse(yValue.Text, out y)))
             {
                 output = false;
                 incorrectYValue.ForeColor = Color.Red;
@@ -155,11 +156,28 @@ namespace FacadeRepairUI
                 incorrectYValue.ForeColor = Color.White;
             }
 
-            // TODO - It shouldn't be possible to add point out of facade.
-            //if (x > width || y > height)
-            //{
-            //    output = false;
-            //}
+            // Checking if points are out of bounds of the facade
+            if (x > callingForm.FacadeDimension()[0])
+            {
+                output = false;
+                incorrectXValue.ForeColor = Color.Red;
+                MessageBox.Show("Error. Point must be located on the facade!");
+            }
+            else
+            {
+                incorrectXValue.ForeColor = Color.White;
+            }
+
+            if (y > callingForm.FacadeDimension()[1])
+            {
+                output = false;
+                incorrectYValue.ForeColor = Color.Red;
+                MessageBox.Show("Error. Point must be located on the facade!");
+            }
+            else
+            {
+                incorrectYValue.ForeColor = Color.White;
+            }
 
             return output;
         }

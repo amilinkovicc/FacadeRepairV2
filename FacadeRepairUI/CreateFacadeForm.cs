@@ -39,12 +39,8 @@ namespace FacadeRepairUI
             WireUpList();
         }
 
-        // TODO - Wire up typeOfDamageDropDown and enum DamageType
-        // TODO - Get info for polygonListBox from SavedData
-
         private void addPolygonButton_Click(object sender, EventArgs e)
         {
-            // TODO - add polygon to polygonlistbox
             DamageType.TryParse(typeOfDamageDropDown.Text, out DamageType damage);
 
             if (damage == DamageType.Partially)
@@ -83,7 +79,6 @@ namespace FacadeRepairUI
         {
             if (ValidateFacade())
             {
-                // TODO - If for create button if facade is full or partually damaged
                 mainFacade.objectName = objectNameValue.Text;
                 mainFacade.objectAddress = objectAddressValue.Text;
                 mainFacade.objectOwner = objectOwnerValue.Text;
@@ -228,6 +223,13 @@ namespace FacadeRepairUI
             return this.Name;
         }
 
+        public double[] FacadeDimension()
+        {
+            double[] dimen = { double.Parse(objectWidthValue.Text), double.Parse(objectHeightValue.Text) };
+
+            return dimen;
+        }
+
         private void CreateFacadeForm_Load(object sender, EventArgs e)
         {
             incorrectObjectNameValue.ForeColor = Color.White;
@@ -236,6 +238,10 @@ namespace FacadeRepairUI
             incorrectHeightValue.ForeColor = Color.White;
             incorrectWidthValue.ForeColor = Color.White;
 
+            foreach (var item in Enum.GetValues(typeof(DamageType)))
+            {
+                typeOfDamageDropDown.Items.Add(item);
+            }
         }
     }
 }

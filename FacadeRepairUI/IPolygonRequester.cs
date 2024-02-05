@@ -12,5 +12,7 @@ namespace FacadeRepairUI
         void PolygonComplete(PolygonModel polygonModel);
 
         string PolygonName();
+
+        double[] FacadeDimension();
     }
 }

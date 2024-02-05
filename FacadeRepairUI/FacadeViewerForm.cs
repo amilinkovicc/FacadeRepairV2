@@ -73,7 +73,6 @@ namespace FacadeRepairUI
             this.Close();
         }
 
-        // TODO - Finish code
         public void AddPolygons(List<PolygonModel> polygonsOfFacade)
         {
             // Calculate relation between image size and PictureBox size and scale coordinates according to it

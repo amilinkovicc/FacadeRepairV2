@@ -104,8 +104,6 @@ namespace FacadeRepairUI
 
         public string PolygonName()
         {
-            //TODO - Treba nesto da iradisi ili izbrisi
-            //throw new NotImplementedException();
             return "";
         }
 
@@ -130,6 +128,11 @@ namespace FacadeRepairUI
         {
             callingForm.PolygonViewComplete(mainPolygon);
             this.Close();
+        }
+
+        public double[] FacadeDimension()
+        {
+            throw new NotImplementedException();
         }
     }
 }

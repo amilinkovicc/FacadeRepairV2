@@ -45,6 +45,8 @@
             this.createFacadeButton = new System.Windows.Forms.Button();
             this.loadPolygonButton = new System.Windows.Forms.Button();
             this.dimensionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.incorrectWidthValue = new System.Windows.Forms.Label();
+            this.incorrectHeightValue = new System.Windows.Forms.Label();
             this.objectWidthValue = new System.Windows.Forms.TextBox();
             this.objectHeightValue = new System.Windows.Forms.TextBox();
             this.heightLabel = new System.Windows.Forms.Label();
@@ -52,8 +54,6 @@
             this.incorrectObjectNameValue = new System.Windows.Forms.Label();
             this.incorrectObjectAddressValue = new System.Windows.Forms.Label();
             this.incorrectObjectOwnerValue = new System.Windows.Forms.Label();
-            this.incorrectHeightValue = new System.Windows.Forms.Label();
-            this.incorrectWidthValue = new System.Windows.Forms.Label();
             this.dimensionsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -137,9 +137,6 @@
             // 
             this.typeOfDamageDropDown.ForeColor = System.Drawing.SystemColors.WindowText;
             this.typeOfDamageDropDown.FormattingEnabled = true;
-            this.typeOfDamageDropDown.Items.AddRange(new object[] {
-            "Full",
-            "Partially"});
             this.typeOfDamageDropDown.Location = new System.Drawing.Point(244, 504);
             this.typeOfDamageDropDown.Name = "typeOfDamageDropDown";
             this.typeOfDamageDropDown.Size = new System.Drawing.Size(181, 38);
@@ -240,6 +237,28 @@
             this.dimensionsGroupBox.TabStop = false;
             this.dimensionsGroupBox.Text = "Dimensions";
             // 
+            // incorrectWidthValue
+            // 
+            this.incorrectWidthValue.AutoSize = true;
+            this.incorrectWidthValue.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.incorrectWidthValue.ForeColor = System.Drawing.Color.Red;
+            this.incorrectWidthValue.Location = new System.Drawing.Point(213, 134);
+            this.incorrectWidthValue.Name = "incorrectWidthValue";
+            this.incorrectWidthValue.Size = new System.Drawing.Size(82, 13);
+            this.incorrectWidthValue.TabIndex = 33;
+            this.incorrectWidthValue.Text = "Incorrect value";
+            // 
+            // incorrectHeightValue
+            // 
+            this.incorrectHeightValue.AutoSize = true;
+            this.incorrectHeightValue.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.incorrectHeightValue.ForeColor = System.Drawing.Color.Red;
+            this.incorrectHeightValue.Location = new System.Drawing.Point(213, 81);
+            this.incorrectHeightValue.Name = "incorrectHeightValue";
+            this.incorrectHeightValue.Size = new System.Drawing.Size(82, 13);
+            this.incorrectHeightValue.TabIndex = 33;
+            this.incorrectHeightValue.Text = "Incorrect value";
+            // 
             // objectWidthValue
             // 
             this.objectWidthValue.Location = new System.Drawing.Point(115, 97);
@@ -308,28 +327,6 @@
             this.incorrectObjectOwnerValue.Size = new System.Drawing.Size(82, 13);
             this.incorrectObjectOwnerValue.TabIndex = 32;
             this.incorrectObjectOwnerValue.Text = "Incorrect value";
-            // 
-            // incorrectHeightValue
-            // 
-            this.incorrectHeightValue.AutoSize = true;
-            this.incorrectHeightValue.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.incorrectHeightValue.ForeColor = System.Drawing.Color.Red;
-            this.incorrectHeightValue.Location = new System.Drawing.Point(213, 81);
-            this.incorrectHeightValue.Name = "incorrectHeightValue";
-            this.incorrectHeightValue.Size = new System.Drawing.Size(82, 13);
-            this.incorrectHeightValue.TabIndex = 33;
-            this.incorrectHeightValue.Text = "Incorrect value";
-            // 
-            // incorrectWidthValue
-            // 
-            this.incorrectWidthValue.AutoSize = true;
-            this.incorrectWidthValue.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.incorrectWidthValue.ForeColor = System.Drawing.Color.Red;
-            this.incorrectWidthValue.Location = new System.Drawing.Point(213, 134);
-            this.incorrectWidthValue.Name = "incorrectWidthValue";
-            this.incorrectWidthValue.Size = new System.Drawing.Size(82, 13);
-            this.incorrectWidthValue.TabIndex = 33;
-            this.incorrectWidthValue.Text = "Incorrect value";
             // 
             // CreateFacadeForm
             // 

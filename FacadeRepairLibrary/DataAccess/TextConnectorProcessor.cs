@@ -51,7 +51,7 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
                     surfaceArea = double.Parse(cols[2]),
                     diameter = double.Parse(cols[3])
                 };
-                string temp = cols[4]; // TODO - Finish conversion. List of points seperated with '|'
+                string temp = cols[4];
 
                 //temp = "|(8 9)|(2 9)|(2 3)|(8 3)"
                 string[] polygonPoints = temp.Split('|');
@@ -91,7 +91,6 @@ namespace FacadeRepairLibrary.DataAccess.TextHelpers
                 };
                 string temp = cols[7]; //temp = "|2|4|5"
 
-                // TODO - Connect facades with polygonId-s (foreign key)
                 string[] facadePolygonIds = temp.Split('|');
                 for (int i = 1, n = facadePolygonIds.Count(); i < n; i++) //* i starts from 1 because polygonPoints[0] = ""
                 {
